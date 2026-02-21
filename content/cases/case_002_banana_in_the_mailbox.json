@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "caseId": "case_002_banana_in_the_mailbox",
+  "orderIndex": 2,
+  "title": "The Case of the Banana in the Mailbox",
+  "summary": "Someone mailed a banana. That’s illegal in 12 countries and also in the Mayor’s heart. Solve four clues (times tables, sharing, coins, and clocks) to find the fibber.",
+  "difficultyBand": 3,
+  "estimatedMinutes": 14,
+  "introLetter": {
+    "fromName": "Deputy Mail Squirrel (Acting)",
+    "toName": "Detective (You)",
+    "subjectLine": "EMERGENCY: A banana has entered the mailbox. It is smug.",
+    "bodyParagraphs": [
+      "Detective!",
+      "We found a banana inside Mailbox #7. Not in an envelope. Not in a bag. Just… banana.",
+      "Three suspects were spotted nearby: a coin-counting countess, a clock-obsessed squirrel, and a crate-stacking mole.",
+      "Please solve the clues before the banana starts charging rent."
+    ],
+    "signature": "Sincerely (and nervously),\nDeputy Mail Squirrel",
+    "postmark": {
+      "city": "Goofington",
+      "dateISO": "2026-02-22",
+      "stampSlogan": "Goofington Postal Service: We Do Not Endorse Bananas."
+    }
+  },
+  "suspects": [
+    {
+      "id": "s1_countess_coinella",
+      "name": "Countess Coinella",
+      "roleTagline": "Coin Collector & Professional Change-Maker",
+      "portraitKey": "portrait_countess_coinella",
+      "alibi": {
+        "claim": "I paid 65¢ for a banana-scented candle using EXACT change. It was art.",
+        "note": "Her money story should match the coin clue."
+      },
+      "quips": [
+        "If it jingles, it’s mine.",
+        "I never panic. I merely… reorganize.",
+        "My pockets have pockets."
+      ]
+    },
+    {
+      "id": "s2_clockwork_squirrel",
+      "name": "Clockwork Squirrel",
+      "roleTagline": "Time Enthusiast & Wristwatch Whisperer",
+      "portraitKey": "portrait_clockwork_squirrel",
+      "alibi": {
+        "claim": "At exactly 9:05, I was polishing the town clock. At 9:50, I was still polishing. Time is circular!",
+        "note": "If he can’t read the clocks correctly, his whole alibi wobbles."
+      },
+      "quips": [
+        "Tick tock is just a suggestion.",
+        "If you’re late, blame the sun.",
+        "I own 47 clocks. None agree."
+      ]
+    },
+    {
+      "id": "s3_crate_mole",
+      "name": "Crate-Stacker Mole",
+      "roleTagline": "Underground Logistics & Box Tower Champion",
+      "portraitKey": "portrait_crate_mole",
+      "alibi": {
+        "claim": "I stacked crates in perfect groups. Multiplication is my love language.",
+        "note": "His multiplication should be solid. We’ll test it."
+      },
+      "quips": [
+        "Boxes don’t lie. People do.",
+        "My tunnels have tunnels.",
+        "Never trust a banana with confidence."
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "l1_mailbox_row",
+      "name": "Mailbox Row (Banana District)",
+      "backgroundKey": "bg_mailbox_row",
+      "description": "A row of mailboxes, each with a unique personality. Mailbox #7 is currently panicking."
+    },
+    {
+      "id": "l2_coin_counter",
+      "name": "Coin Counter Corner",
+      "backgroundKey": "bg_coin_counter",
+      "description": "A table covered in coins and little velvet bags. The coins look smug too."
+    },
+    {
+      "id": "l3_clock_tower",
+      "name": "Clock Tower (No Banana Allowed)",
+      "backgroundKey": "bg_clock_tower",
+      "description": "A giant clock face with fingerprints everywhere. Also one banana peel."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_banana_invoice",
+      "label": "Banana Crate Invoice",
+      "description": "An invoice for 3 crates with 4 bananas each. Someone wrote 'DO NOT MAIL' in glitter ink.",
+      "spriteKey": "sticker_banana_invoice"
+    },
+    {
+      "id": "e_sandwich_split",
+      "label": "Split Sandwich Diagram",
+      "description": "A diagram showing 24 sandwich slices shared equally. A mole has drawn a victory crown.",
+      "spriteKey": "sticker_sandwich_split"
+    },
+    {
+      "id": "e_coin_trail",
+      "label": "Coin Trail",
+      "description": "A neat row of coins that totals exactly 65¢. The banana seems impressed.",
+      "spriteKey": "sticker_coin_trail"
+    },
+    {
+      "id": "e_clock_smudge",
+      "label": "Clock Smudge",
+      "description": "A smudgy thumbprint on the 1. Someone misread 9:05 as 9:50. Oops.",
+      "spriteKey": "sticker_clock_smudge"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "p1_mul_quiz",
+      "type": "NUMBER_INPUT_QUIZ",
+      "title": "Crate Stack Combo (×)",
+      "prompt": "Answer the multiplication rounds to check the crate story.",
+      "topicKey": "mul_div",
+      "difficulty": 2,
+      "seed": 2001,
+      "points": 10,
+      "unlocksEvidenceId": "e_banana_invoice",
+      "ui": {
+        "introLine": "A mole hands you a tiny hard hat: 'Safety first. Then multiplication.'",
+        "successQuips": [
+          "Combo cleared! The crates salute you.",
+          "Nice! The banana looks slightly less smug.",
+          "Your times tables are unstoppable."
+        ],
+        "failQuips": [
+          "The crates wobble. Try again.",
+          "Nope — the hard hat is disappointed.",
+          "The banana laughs quietly."
+        ]
+      },
+      "hints": [
+        "Think of groups: 3 groups of 4 means 3 × 4.",
+        "Try doubles (×2), then build bigger facts.",
+        "Check your work by repeated addition." 
+      ],
+      "params": {
+        "rounds": [
+          { "id": "r1", "question": "3 crates with 4 bananas each = ?", "answer": 12, "spriteKey": "crate_3x4", "solvedQuip": "Twelve bananas. That’s a lot of mail." },
+          { "id": "r2", "question": "5 boxes with 6 stickers each = ?", "answer": 30, "spriteKey": "crate_5x6" },
+          { "id": "r3", "question": "7 hats with 2 honks each = ?", "answer": 14, "spriteKey": "crate_7x2" }
+        ],
+        "maxMistakes": 3
+      }
+    },
+    {
+      "id": "p2_div_quiz",
+      "type": "NUMBER_INPUT_QUIZ",
+      "title": "Sandwich Sharing Shuffle (÷)",
+      "prompt": "Answer the division rounds. If the sharing story is wrong, someone is fibbing.",
+      "topicKey": "mul_div",
+      "difficulty": 2,
+      "seed": 2002,
+      "points": 10,
+      "unlocksEvidenceId": "e_sandwich_split",
+      "ui": {
+        "introLine": "A sandwich appears. It looks nervous.",
+        "successQuips": [
+          "Evenly shared! The sandwich relaxes.",
+          "Correct! The slices applaud politely.",
+          "Division conquered. No crumbs remain."
+        ],
+        "failQuips": [
+          "That’s not even sharing. Try again.",
+          "The sandwich cries one tiny tear.",
+          "Close! Count the groups carefully."
+        ]
+      },
+      "hints": [
+        "Division asks: how many in each group?",
+        "Check with multiplication. If 24 ÷ 6 = 4, then 6 × 4 should equal 24.",
+        "Draw circles and share items." 
+      ],
+      "params": {
+        "rounds": [
+          { "id": "d1", "question": "24 slices shared by 6 friends = ? each", "answer": 4, "spriteKey": "sandwich_24_6" },
+          { "id": "d2", "question": "18 stamps split into 3 piles = ? per pile", "answer": 6, "spriteKey": "stamps_18_3" },
+          { "id": "d3", "question": "20 coins shared into 5 pockets = ? each", "answer": 4, "spriteKey": "coins_20_5" }
+        ],
+        "maxMistakes": 3
+      }
+    },
+    {
+      "id": "p3_coin_sum",
+      "type": "COIN_SUM",
+      "title": "Exact Change Showdown",
+      "prompt": "Make exactly 65¢ using coins from the drawer.",
+      "topicKey": "money",
+      "difficulty": 2,
+      "seed": 2003,
+      "points": 10,
+      "unlocksEvidenceId": "e_coin_trail",
+      "ui": {
+        "introLine": "The Countess whispers: 'Coins must be arranged by vibe.'",
+        "successQuips": [
+          "Exact change! The coins jingle happily.",
+          "Perfect! The banana frowns.",
+          "Cashier approved."
+        ],
+        "failQuips": [
+          "Not exact. The coins roll away in shame.",
+          "Close! Try swapping a coin.",
+          "The banana says nothing. That’s worse."
+        ]
+      },
+      "hints": [
+        "Start with a quarter (25¢) and build up.",
+        "Two quarters is 50¢. Then you need 15¢ more.",
+        "Try using a dime (10¢) and a nickel (5¢)."
+      ],
+      "params": {
+        "targetCents": 65,
+        "coins": [
+          { "id": "c25", "label": "Quarter", "valueCents": 25, "spriteKey": "coin_25" },
+          { "id": "c10", "label": "Dime", "valueCents": 10, "spriteKey": "coin_10" },
+          { "id": "c5", "label": "Nickel", "valueCents": 5, "spriteKey": "coin_5" },
+          { "id": "c1", "label": "Penny", "valueCents": 1, "spriteKey": "coin_1" }
+        ],
+        "constraints": { "maxCoins": 10, "bonusFewestCoins": 4 }
+      }
+    },
+    {
+      "id": "p4_clock_read",
+      "type": "CLOCK_READ",
+      "title": "Clock Tower Confusion",
+      "prompt": "Read each clock correctly. One suspect got times mixed up…",
+      "topicKey": "time",
+      "difficulty": 3,
+      "seed": 2004,
+      "points": 10,
+      "unlocksEvidenceId": "e_clock_smudge",
+      "ui": {
+        "introLine": "The clock tower creaks: 'Please… interpret me correctly.'",
+        "successQuips": [
+          "Time read! The gears sigh in relief.",
+          "Correct! The clock stops judging you.",
+          "Nice. The banana is late now."
+        ],
+        "failQuips": [
+          "Nope. The minute hand is screaming.",
+          "Try again—watch where the hour hand points.",
+          "The clock face frowns."
+        ]
+      },
+      "hints": [
+        "Minute hand: count by 5s around the clock.",
+        "Hour hand moves between numbers as minutes pass.",
+        "9:05 is just after 9, not near 10." 
+      ],
+      "params": {
+        "rounds": [
+          {
+            "id": "t1",
+            "hour": 3,
+            "minute": 15,
+            "prompt": "What time is it?",
+            "options": ["3:15", "3:45", "2:15", "4:15"],
+            "correctOption": "3:15"
+          },
+          {
+            "id": "t2",
+            "hour": 6,
+            "minute": 30,
+            "prompt": "What time is it?",
+            "options": ["6:30", "6:03", "5:30", "7:30"],
+            "correctOption": "6:30"
+          },
+          {
+            "id": "t3",
+            "hour": 9,
+            "minute": 5,
+            "prompt": "What time is it?",
+            "options": ["9:05", "9:50", "10:05", "8:55"],
+            "correctOption": "9:05"
+          }
+        ]
+      }
+    }
+  ],
+  "finalQuestion": {
+    "question": "Who is lying about their time-based alibi?",
+    "options": ["s1_countess_coinella", "s2_clockwork_squirrel", "s3_crate_mole"],
+    "correctSuspectId": "s2_clockwork_squirrel",
+    "correctRationale": [
+      "The clock clue shows 9:05, which is not the same as 9:50.",
+      "The coin clue supports the Countess’s exact-change claim.",
+      "The crate multiplication matches the banana invoice evidence."
+    ]
+  },
+  "reveal": {
+    "correct": {
+      "headline": "CASE CLOSED: The Clockwork Squirrel Was… Off By A Lot.",
+      "bodyParagraphs": [
+        "Clockwork Squirrel gasps. 'Time is… not circular?'",
+        "The banana nods solemnly (somehow).",
+        "With the clocks corrected, the banana is safely escorted out of Mailbox #7.",
+        "Everyone agrees to mail only legal objects from now on. Probably."
+      ]
+    },
+    "incorrect": {
+      "headline": "NOT QUITE: The Banana Raises An Eyebrow.",
+      "bodyParagraphs": [
+        "The banana remains smug.",
+        "Someone’s alibi is wrong, and it involves reading clocks.",
+        "Try again!"
+      ]
+    }
+  },
+  "rewards": {
+    "xp": 60,
+    "stickers": [
+      {
+        "id": "sticker_banana_no_mail",
+        "name": "Do Not Mail Bananas",
+        "spriteKey": "reward_sticker_banana_no_mail",
+        "rarity": "common"
+      }
+    ],
+    "badges": [
+      {
+        "id": "badge_time_tamer",
+        "name": "Time Tamer",
+        "description": "Read every clock without getting dizzy.",
+        "iconKey": "badge_clock_star"
+      }
+    ]
+  },
+  "unlockNextCaseIds": []
+}

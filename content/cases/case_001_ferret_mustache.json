@@ -1,0 +1,457 @@
+{
+  "version": 1,
+  "caseId": "case_001_ferret_mustache",
+  "orderIndex": 1,
+  "title": "The Case of the Borrowed Mustache (and the Unexpected Ferret)",
+  "summary": "The Mayor's legendary mustache is missing. In its place: a baffled ferret wearing tiny sunglasses. Solve four math clues to figure out whose alibi doesn't add up.",
+  "difficultyBand": 2,
+  "estimatedMinutes": 12,
+  "introLetter": {
+    "fromName": "Mayor Mustachio Q. Whiskerboom",
+    "toName": "Detective (You)",
+    "subjectLine": "URGENT: My mustache has been replaced with a ferret. Again.",
+    "bodyParagraphs": [
+      "Dear Detective,",
+      "This morning, I woke up to discover my magnificent mustache has vanished. In its place is a ferret. A polite ferret. A ferret wearing tiny sunglasses that say 'DO NOT QUESTION ME.'",
+      "Three suspects were nearby. Each offered an alibi that sounded... mathematically confident.",
+      "Please investigate before the ferret holds a press conference."
+    ],
+    "signature": "With trembling upper lip,\nMayor Mustachio Q. Whiskerboom",
+    "postmark": {
+      "city": "Goofington",
+      "dateISO": "2026-02-21",
+      "stampSlogan": "Goofington Postal Service: We Deliver (Mostly)!"
+    }
+  },
+  "suspects": [
+    {
+      "id": "s1_lady_gigglesnort",
+      "name": "Lady Gigglesnort",
+      "roleTagline": "Professional Unicyclist & Part-Time Dramatic Sigh Collector",
+      "portraitKey": "portrait_lady_gigglesnort",
+      "alibi": {
+        "claim": "I pedaled from the park at 10, then rode +10 blocks, +5 blocks, and oops -2 blocks (banana peel). I ended at 23 blocks. Totally normal.",
+        "note": "She says her route math lands on 23. Verify the steps."
+      },
+      "quips": [
+        "I only lie to my plants.",
+        "Banana peels are my true enemy.",
+        "If you hear honking, it wasn't me. Probably."
+      ]
+    },
+    {
+      "id": "s2_professor_pumpernickel",
+      "name": "Professor Pumpernickel",
+      "roleTagline": "Bread Scientist (PhD in Crumbs) & Alarmingly Confident Counter",
+      "portraitKey": "portrait_professor_pumpernickel",
+      "alibi": {
+        "claim": "In my lab, I had 43 experimental loaves. Then 19 fell into the toast volcano. That leaves 26 loaves! Science!",
+        "note": "He claims 43 - 19 = 26. That feels... crunchy."
+      },
+      "quips": [
+        "Numbers fear me. And yeast obeys me.",
+        "I invented gluten-free gravity.",
+        "If I’m wrong, it’s the math’s fault."
+      ]
+    },
+    {
+      "id": "s3_captain_honk",
+      "name": "Captain Honk",
+      "roleTagline": "Goose in a Tiny Hat & Amateur Mailbag Juggler",
+      "portraitKey": "portrait_captain_honk",
+      "alibi": {
+        "claim": "I carried two mailbags. One felt heavy, one felt light. I moved ONE parcel and then—HONK—both were exactly 25!",
+        "note": "He says a single move balances both bags to 25."
+      },
+      "quips": [
+        "HONK means 'hello' and also 'I ate your sandwich.'",
+        "My hat is legally a captain now.",
+        "I do not know what a ferret is. Is it bread?"
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "l1_city_hall",
+      "name": "City Hall (Mustache Emergency Wing)",
+      "backgroundKey": "bg_city_hall_board",
+      "description": "A fancy hallway filled with portraits. All the portraits have mustaches. Even the goldfish."
+    },
+    {
+      "id": "l2_goofington_post_office",
+      "name": "Goofington Post Office",
+      "backgroundKey": "bg_post_office",
+      "description": "The air smells like paper, glue, and decisions. A stamp machine hums ominously."
+    },
+    {
+      "id": "l3_bread_lab",
+      "name": "The Bread Lab (Do Not Feed The Toast Volcano)",
+      "backgroundKey": "bg_bread_lab",
+      "description": "Bubbling beakers. Flying crumbs. A sign that reads: 'IF IT RISES, WE'RE SURPRISED.'"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_wormy_postage_receipt",
+      "label": "Wormy Postage Receipt",
+      "description": "A postage slip stamped: 'TOTAL VERIFIED.' It smells faintly of glitter and regret.",
+      "spriteKey": "sticker_postage_receipt"
+    },
+    {
+      "id": "e_balanced_bag_photo",
+      "label": "Balanced Bag Photo",
+      "description": "A blurry photo of two mailbags perfectly balanced. A goose wing is photobombing.",
+      "spriteKey": "sticker_balanced_bags"
+    },
+    {
+      "id": "e_pigeon_math_bubble",
+      "label": "Pigeon Math Bubble",
+      "description": "A witness bubble: '43 pigeons, 19 left.' Someone wrote 'NOT 26!!!' in marker.",
+      "spriteKey": "sticker_pigeon_bubble"
+    },
+    {
+      "id": "e_unicycle_tire_tracks",
+      "label": "Unicycle Tire Tracks",
+      "description": "A chalk outline of a wobbly path. The banana peel has been arrested.",
+      "spriteKey": "sticker_tire_tracks"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "p1_stamp_sum",
+      "type": "STAMP_SUM",
+      "title": "Stamp Licker 9000: Postage Panic",
+      "prompt": "Build EXACT postage for the Mayor’s emergency letter: 37¢. Drag stamps onto the envelope. Watch out: the glitter stamp demands its coupon worm friend.",
+      "topicKey": "add_sub",
+      "difficulty": 1,
+      "seed": 1001,
+      "points": 10,
+      "unlocksEvidenceId": "e_wormy_postage_receipt",
+      "ui": {
+        "introLine": "The stamp machine squeaks: 'FEED ME NUMBERS (and maybe snacks).'",
+        "successQuips": [
+          "STAMPED! That envelope is officially too powerful.",
+          "Perfect postage! The mailbox salutes you.",
+          "You have pleased the Stamp Spirits."
+        ],
+        "failQuips": [
+          "Close! The stamp machine sneezed confetti in disappointment.",
+          "Not quite—your envelope is under-flavored.",
+          "The coupon worm wiggles: 'I yearn for accuracy.'"
+        ]
+      },
+      "hints": [
+        "Try making 37 with tens first, then add ones.",
+        "You can use a negative coupon stamp if it helps.",
+        "If you use a stamp that requires a friend, add its friend too."
+      ],
+      "params": {
+        "targetCents": 37,
+        "stamps": [
+          {
+            "id": "st_ten",
+            "label": "10¢ Turbo Stamp",
+            "valueCents": 10,
+            "spriteKey": "stamp_10"
+          },
+          {
+            "id": "st_twenty",
+            "label": "20¢ Serious Stamp",
+            "valueCents": 20,
+            "spriteKey": "stamp_20"
+          },
+          {
+            "id": "st_five",
+            "label": "5¢ Tiny High-Five Stamp",
+            "valueCents": 5,
+            "spriteKey": "stamp_5"
+          },
+          {
+            "id": "st_two",
+            "label": "2¢ Duck Stamp (Not a Duck)",
+            "valueCents": 2,
+            "spriteKey": "stamp_2"
+          },
+          {
+            "id": "st_one",
+            "label": "1¢ Micro Stamp of Destiny",
+            "valueCents": 1,
+            "spriteKey": "stamp_1"
+          },
+          {
+            "id": "st_glitter_plus3",
+            "label": "+3¢ Glitter Stamp (LOUD)",
+            "valueCents": 3,
+            "spriteKey": "stamp_glitter_3",
+            "requiresStampId": "st_coupon_worm_minus1"
+          },
+          {
+            "id": "st_coupon_worm_minus1",
+            "label": "-1¢ Coupon Worm (Suspicious)",
+            "valueCents": -1,
+            "spriteKey": "stamp_coupon_worm"
+          }
+        ],
+        "constraints": {
+          "maxStamps": 6,
+          "bonusFewestStamps": 4
+        }
+      }
+    },
+    {
+      "id": "p2_mailbag_balance",
+      "type": "MAILBAG_BALANCE",
+      "title": "Suspicious Sack Scales",
+      "prompt": "Balance the two mailbags so BOTH weigh exactly 25. Drag movable parcels between bags. (Sealed parcels refuse to move because they’re shy.)",
+      "topicKey": "add_sub",
+      "difficulty": 2,
+      "seed": 1002,
+      "points": 10,
+      "unlocksEvidenceId": "e_balanced_bag_photo",
+      "ui": {
+        "introLine": "Captain Honk whispers: 'HONK (this means: please do math).' ",
+        "successQuips": [
+          "Balanced! The scale does a happy little jig.",
+          "Perfect! The mailbags are emotionally equal now.",
+          "HONK of approval! (That’s a good honk.)"
+        ],
+        "failQuips": [
+          "Not balanced yet—the scale is doing the sad wiggle.",
+          "Close! One bag is still bragging.",
+          "The parcels rattle: 'We yearn for symmetry!'"
+        ]
+      },
+      "hints": [
+        "Add each bag to see how far from 25 it is.",
+        "Try moving ONE parcel first.",
+        "If one bag is 5 too heavy, move a 5 to the other side."
+      ],
+      "params": {
+        "targetWeight": 25,
+        "leftBag": [
+          {
+            "id": "pa_sealed_16",
+            "label": "Sealed Parcel: 16",
+            "value": 16,
+            "spriteKey": "parcel_sealed_16",
+            "movable": false
+          },
+          {
+            "id": "pa_movable_9",
+            "label": "Parcel: 9",
+            "value": 9,
+            "spriteKey": "parcel_9",
+            "movable": true
+          },
+          {
+            "id": "pa_movable_5",
+            "label": "Parcel: 5",
+            "value": 5,
+            "spriteKey": "parcel_5",
+            "movable": true
+          }
+        ],
+        "rightBag": [
+          {
+            "id": "pb_sealed_12",
+            "label": "Sealed Parcel: 12",
+            "value": 12,
+            "spriteKey": "parcel_sealed_12",
+            "movable": false
+          },
+          {
+            "id": "pb_movable_8",
+            "label": "Parcel: 8",
+            "value": 8,
+            "spriteKey": "parcel_8",
+            "movable": true
+          }
+        ],
+        "showTargetOnBags": true
+      }
+    },
+    {
+      "id": "p3_bubble_pop_difference",
+      "type": "BUBBLE_POP_DIFFERENCE",
+      "title": "Pop the Odd Alibi Bubble",
+      "prompt": "Pop the bubble that equals 24 AND uses the numbers 43 and 19. (Someone’s loaf-counting seems… crispy.)",
+      "topicKey": "add_sub",
+      "difficulty": 2,
+      "seed": 1003,
+      "points": 10,
+      "unlocksEvidenceId": "e_pigeon_math_bubble",
+      "ui": {
+        "introLine": "A witness whispers: 'The pigeons know… the pigeons ALWAYS know.'",
+        "successQuips": [
+          "POP! Truth sprays everywhere (it’s fine, it’s washable).",
+          "Correct! The bubble confesses with a tiny squeak.",
+          "You popped the lie! Somewhere, a calculator applauds."
+        ],
+        "failQuips": [
+          "POP! That bubble was innocent. Awkward.",
+          "Not that one—try the bubble with the right numbers.",
+          "The pigeons shake their heads in synchronized judgment."
+        ]
+      },
+      "hints": [
+        "You need the numbers 43 and 19 in the same bubble.",
+        "Compute 43 - 19 carefully.",
+        "Look for subtraction, not just any 24."
+      ],
+      "params": {
+        "goalValue": 24,
+        "required": {
+          "op": "sub",
+          "mustUseNumbers": [43, 19]
+        },
+        "bubbles": [
+          {
+            "id": "bb_pigeons_43_19",
+            "statement": "I counted 43 pigeons, then 19 left wearing tiny hats.",
+            "expression": { "a": 43, "b": 19, "op": "sub" },
+            "spriteKey": "bubble_pigeon",
+            "tag": "suspicious"
+          },
+          {
+            "id": "bb_bread_18_6",
+            "statement": "I baked 18 buns and 6 tried to escape. Total buns: ???",
+            "expression": { "a": 18, "b": 6, "op": "add" },
+            "spriteKey": "bubble_bread",
+            "tag": "silly"
+          },
+          {
+            "id": "bb_goose_30_6",
+            "statement": "HONK. I had 30 crackers, then 6 mysteriously disappeared into my beak.",
+            "expression": { "a": 30, "b": 6, "op": "sub" },
+            "spriteKey": "bubble_goose",
+            "tag": "dramatic"
+          },
+          {
+            "id": "bb_unicycle_20_4",
+            "statement": "I wobbled 20 times and then 4 more times. That is… a number!",
+            "expression": { "a": 20, "b": 4, "op": "add" },
+            "spriteKey": "bubble_unicycle",
+            "tag": "silly"
+          },
+          {
+            "id": "bb_socks_25_1",
+            "statement": "I found 25 socks and lost 1 sock to the Sock Dimension.",
+            "expression": { "a": 25, "b": 1, "op": "sub" },
+            "spriteKey": "bubble_sock",
+            "tag": "serious"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_evidence_tape_path",
+      "type": "EVIDENCE_TAPE_PATH",
+      "title": "Tape-Measure Chase: Unicycle Route",
+      "prompt": "Start at 10 and reach 23 using EXACTLY 3 move cards. Choose wisely—banana peels are not a valid excuse in math court.",
+      "topicKey": "add_sub",
+      "difficulty": 2,
+      "seed": 1004,
+      "points": 10,
+      "unlocksEvidenceId": "e_unicycle_tire_tracks",
+      "ui": {
+        "introLine": "You unroll the tape measure. It unrolls back. You glare. It behaves.",
+        "successQuips": [
+          "Nailed it! The tape measure nods respectfully.",
+          "You reached 23! The banana peel files a complaint.",
+          "Route verified! Wobble science is real."
+        ],
+        "failQuips": [
+          "Nope—your route drifted into the Swamp of Wrong Numbers.",
+          "So close! Try a different set of moves.",
+          "The tape measure retracts dramatically: 'I CANNOT WATCH THIS.'"
+        ]
+      },
+      "hints": [
+        "From 10 to 23 is +13 total.",
+        "Try a big jump, then adjust with smaller moves.",
+        "You must use exactly 3 cards."
+      ],
+      "params": {
+        "start": 10,
+        "target": 23,
+        "pickCount": 3,
+        "mustUseExactlyPickCount": true,
+        "moveCards": [
+          { "id": "mc_plus10", "label": "+10 Turbo Pedal", "delta": 10, "spriteKey": "card_plus10" },
+          { "id": "mc_plus5", "label": "+5 Fancy Spin", "delta": 5, "spriteKey": "card_plus5" },
+          { "id": "mc_minus2", "label": "-2 Banana Peel Slide", "delta": -2, "spriteKey": "card_minus2" },
+          { "id": "mc_plus3", "label": "+3 Determined Wobble", "delta": 3, "spriteKey": "card_plus3" },
+          { "id": "mc_plus1", "label": "+1 Tiny Victory", "delta": 1, "spriteKey": "card_plus1" },
+          { "id": "mc_minus1", "label": "-1 Oops Button", "delta": -1, "spriteKey": "card_minus1" }
+        ]
+      }
+    }
+  ],
+  "finalQuestion": {
+    "question": "Which suspect’s alibi does NOT add up?",
+    "options": ["s1_lady_gigglesnort", "s2_professor_pumpernickel", "s3_captain_honk"],
+    "correctSuspectId": "s2_professor_pumpernickel",
+    "correctRationale": [
+      "The pigeon witness bubble proves 43 - 19 = 24, not 26.",
+      "Lady Gigglesnort’s route math can reach 23 exactly using the move cards.",
+      "Captain Honk’s claim matches the balanced mailbag evidence (both end at 25 after one move)."
+    ],
+    "wrongRationales": [
+      {
+        "suspectId": "s1_lady_gigglesnort",
+        "lines": [
+          "Her route can be verified to land on 23 using exactly three moves.",
+          "Also she is clearly too busy battling banana peels to steal mustaches (probably)."
+        ]
+      },
+      {
+        "suspectId": "s3_captain_honk",
+        "lines": [
+          "The mailbag puzzle shows a single parcel move can balance to 25 and 25.",
+          "He did honk suspiciously, but that’s… just how geese communicate."
+        ]
+      }
+    ]
+  },
+  "reveal": {
+    "correct": {
+      "headline": "CASE CLOSED: The Professor’s Math Was Toast.",
+      "bodyParagraphs": [
+        "Professor Pumpernickel freezes like a baguette in a snowstorm.",
+        "\"FINE!\" he blurts. \"I borrowed the mustache for… scientific reasons.\"",
+        "The ferret removes its tiny sunglasses. Underneath? EVEN TINIER SUNGLASSES.",
+        "The Mayor’s mustache is returned, slightly buttered, and emotionally stronger than ever."
+      ],
+      "cutsceneKey": "cutscene_ferret_sunglasses_reveal",
+      "sfxKey": "sfx_ferret_giggle"
+    },
+    "incorrect": {
+      "headline": "NOT QUITE: The Ferret Shakes Its Head.",
+      "bodyParagraphs": [
+        "The ferret squints behind its tiny sunglasses.",
+        "A gentle honk echoes somewhere. A bread crumb falls dramatically in slow motion.",
+        "Try again—one suspect’s numbers are the real culprit."
+      ]
+    }
+  },
+  "rewards": {
+    "xp": 50,
+    "stickers": [
+      {
+        "id": "sticker_ferret_mustache",
+        "name": "Ferret Mustache Sticker",
+        "spriteKey": "reward_sticker_ferret_mustache",
+        "rarity": "rare"
+      }
+    ],
+    "badges": [
+      {
+        "id": "badge_junior_inspector",
+        "name": "Junior Inspector",
+        "description": "Solved your first case without getting honked into oblivion.",
+        "iconKey": "badge_magnifier_star"
+      }
+    ]
+  },
+  "unlockNextCaseIds": ["case_002_banana_in_the_mailbox"]
+}
