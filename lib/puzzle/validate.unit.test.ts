@@ -171,9 +171,9 @@ describe("validatePuzzle edge cases", () => {
     const result = validatePuzzle(puzzle, {
       matches: [
         { fractionId: "f_half", decimalId: "d_half", percentId: "p_half" },
-        { fractionId: "f_quarter", decimalId: "d_quarter", percentId: "p_half" },
+        { fractionId: "f_quarter", decimalId: "d_quarter", percentId: "p_tenth" },
         { fractionId: "f_three_quarters", decimalId: "d_three_quarters", percentId: "p_three_quarters" },
-        { fractionId: "f_tenth", decimalId: "d_tenth", percentId: "p_tenth" },
+        { fractionId: "f_tenth", decimalId: "d_tenth", percentId: "p_quarter" },
       ],
     });
 
