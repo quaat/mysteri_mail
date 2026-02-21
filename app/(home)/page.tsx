@@ -1,8 +1,9 @@
 import { getAllCases } from "@/lib/content";
+import type { CaseContent } from "@/lib/schema/caseSchema";
 import { HomeClient } from "@/components/home/HomeClient";
 
 export default function HomePage() {
-  let cases = [];
+  let cases: CaseContent[] = [];
   try {
     cases = getAllCases();
   } catch {

@@ -2,7 +2,7 @@
 
 A playful, story-driven kids math mystery game.
 
-- **Platform:** Next.js 14 (App Router)
+- **Platform:** Next.js 15 (App Router)
 - **UI:** Tailwind + small headless UI primitives
 - **State:** `zustand` + `localStorage`
 - **Puzzles:** Content-driven JSON case files validated by `zod`
@@ -14,6 +14,12 @@ A playful, story-driven kids math mystery game.
 - **Parents / Teacher page:** Local topic stats and progress overview
 
 ## Getting started
+
+Use Node.js `20.19.0` or newer:
+
+```bash
+nvm use
+```
 
 ```bash
 npm install

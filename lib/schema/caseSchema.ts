@@ -1,0 +1,428 @@
+import { z } from "zod";
+
+const IdSchema = z.string().regex(/^[a-z][a-z0-9_]*$/);
+const IsoDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
+const NonEmpty = z.string().min(1);
+
+export const DifficultyBandSchema = z.union([
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+  z.literal(5),
+]);
+
+export const TopicKeySchema = z.enum(["add_sub", "mul_div", "money", "time", "mixed"]);
+
+export const EvidenceSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    description: NonEmpty,
+    spriteKey: NonEmpty,
+  })
+  .strict();
+
+export const SuspectSchema = z
+  .object({
+    id: IdSchema,
+    name: NonEmpty,
+    roleTagline: NonEmpty,
+    portraitKey: NonEmpty,
+    alibi: z
+      .object({
+        claim: NonEmpty,
+        note: NonEmpty,
+      })
+      .strict(),
+    quips: z.array(NonEmpty).min(1),
+  })
+  .strict();
+
+export const LocationSchema = z
+  .object({
+    id: IdSchema,
+    name: NonEmpty,
+    backgroundKey: NonEmpty,
+    description: NonEmpty,
+  })
+  .strict();
+
+export const LetterSchema = z
+  .object({
+    fromName: NonEmpty,
+    toName: NonEmpty,
+    subjectLine: NonEmpty,
+    bodyParagraphs: z.array(NonEmpty).min(1),
+    signature: NonEmpty,
+    postmark: z
+      .object({
+        city: NonEmpty,
+        dateISO: IsoDateSchema,
+        stampSlogan: NonEmpty,
+      })
+      .strict(),
+  })
+  .strict();
+
+const PuzzleUiSchema = z
+  .object({
+    introLine: NonEmpty.optional(),
+    successQuips: z.array(NonEmpty).min(1),
+    failQuips: z.array(NonEmpty).min(1),
+  })
+  .strict();
+
+const PuzzleBaseSchema = z
+  .object({
+    id: IdSchema,
+    type: z.string(),
+    title: NonEmpty,
+    prompt: NonEmpty,
+    topicKey: TopicKeySchema,
+    difficulty: z.number().int().min(1).max(5),
+    seed: z.number().int().nonnegative(),
+    points: z.number().int().min(0).default(10),
+    timeLimitSec: z.number().int().min(0).optional(),
+    unlocksEvidenceId: IdSchema,
+    ui: PuzzleUiSchema,
+    hints: z.array(NonEmpty).max(5).optional(),
+  })
+  .strict();
+
+// STAMP_SUM
+const StampSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    valueCents: z.number().int().refine((n) => n !== 0, "valueCents cannot be 0"),
+    spriteKey: NonEmpty,
+    requiresStampId: IdSchema.optional(),
+  })
+  .strict();
+
+const StampSumParamsSchema = z
+  .object({
+    targetCents: z.number().int(),
+    stamps: z.array(StampSchema).min(4),
+    constraints: z
+      .object({
+        maxStamps: z.number().int().min(1).max(12),
+        bonusFewestStamps: z.number().int().min(1).max(12).optional(),
+      })
+      .strict(),
+  })
+  .strict();
+
+const StampSumPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("STAMP_SUM"),
+  params: StampSumParamsSchema,
+}).strict();
+
+// MAILBAG_BALANCE
+const ParcelSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    value: z.number().int(),
+    spriteKey: NonEmpty,
+    movable: z.boolean().default(true),
+  })
+  .strict();
+
+const MailbagBalanceParamsSchema = z
+  .object({
+    targetWeight: z.number().int(),
+    leftBag: z.array(ParcelSchema).min(1),
+    rightBag: z.array(ParcelSchema).min(1),
+    showTargetOnBags: z.boolean().default(true),
+  })
+  .strict();
+
+const MailbagBalancePuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("MAILBAG_BALANCE"),
+  params: MailbagBalanceParamsSchema,
+}).strict();
+
+// BUBBLE_POP_DIFFERENCE
+const OpSchema = z.enum(["add", "sub"]);
+
+const BubbleExpressionSchema = z
+  .object({
+    a: z.number().int(),
+    b: z.number().int(),
+    op: OpSchema,
+  })
+  .strict();
+
+const BubbleSchema = z
+  .object({
+    id: IdSchema,
+    statement: NonEmpty,
+    expression: BubbleExpressionSchema,
+    spriteKey: NonEmpty,
+    tag: z.enum(["silly", "serious", "dramatic", "suspicious"]).default("silly"),
+  })
+  .strict();
+
+const BubblePopParamsSchema = z
+  .object({
+    goalValue: z.number().int(),
+    required: z
+      .object({
+        op: OpSchema.optional(),
+        mustUseNumbers: z.array(z.number().int()).min(1).optional(),
+      })
+      .strict()
+      .default({}),
+    bubbles: z.array(BubbleSchema).min(4),
+  })
+  .strict();
+
+const BubblePopDifferencePuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("BUBBLE_POP_DIFFERENCE"),
+  params: BubblePopParamsSchema,
+}).strict();
+
+// EVIDENCE_TAPE_PATH
+const MoveCardSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    delta: z.number().int(),
+    spriteKey: NonEmpty,
+  })
+  .strict();
+
+const EvidenceTapePathParamsSchema = z
+  .object({
+    start: z.number().int(),
+    target: z.number().int(),
+    pickCount: z.number().int().min(1).max(6),
+    moveCards: z.array(MoveCardSchema).min(4),
+    mustUseExactlyPickCount: z.boolean().default(true),
+  })
+  .strict();
+
+const EvidenceTapePathPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("EVIDENCE_TAPE_PATH"),
+  params: EvidenceTapePathParamsSchema,
+}).strict();
+
+// NUMBER_INPUT_QUIZ (multiplication/division/etc)
+const NumberInputRoundSchema = z
+  .object({
+    id: IdSchema,
+    question: NonEmpty,
+    answer: z.number().int(),
+    spriteKey: NonEmpty.optional(),
+    solvedQuip: NonEmpty.optional(),
+  })
+  .strict();
+
+const NumberInputQuizParamsSchema = z
+  .object({
+    rounds: z.array(NumberInputRoundSchema).min(3),
+    maxMistakes: z.number().int().min(0).max(10).default(2),
+  })
+  .strict();
+
+const NumberInputQuizPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("NUMBER_INPUT_QUIZ"),
+  params: NumberInputQuizParamsSchema,
+}).strict();
+
+// COIN_SUM (money)
+const CoinSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    valueCents: z.number().int().refine((n) => n !== 0, "valueCents cannot be 0"),
+    spriteKey: NonEmpty,
+  })
+  .strict();
+
+const CoinSumParamsSchema = z
+  .object({
+    targetCents: z.number().int().min(0),
+    coins: z.array(CoinSchema).min(4),
+    constraints: z
+      .object({
+        maxCoins: z.number().int().min(1).max(20),
+        bonusFewestCoins: z.number().int().min(1).max(20).optional(),
+      })
+      .strict(),
+  })
+  .strict();
+
+const CoinSumPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("COIN_SUM"),
+  params: CoinSumParamsSchema,
+}).strict();
+
+// CLOCK_READ (analog clock reading)
+const ClockRoundSchema = z
+  .object({
+    id: IdSchema,
+    hour: z.number().int().min(1).max(12),
+    minute: z.number().int().min(0).max(59),
+    prompt: NonEmpty,
+    options: z.array(NonEmpty).min(2).max(6),
+    correctOption: NonEmpty,
+  })
+  .strict();
+
+const ClockReadParamsSchema = z
+  .object({
+    rounds: z.array(ClockRoundSchema).min(3),
+  })
+  .strict();
+
+const ClockReadPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("CLOCK_READ"),
+  params: ClockReadParamsSchema,
+}).strict();
+
+export const PuzzleSchema = z.discriminatedUnion("type", [
+  StampSumPuzzleSchema,
+  MailbagBalancePuzzleSchema,
+  BubblePopDifferencePuzzleSchema,
+  EvidenceTapePathPuzzleSchema,
+  NumberInputQuizPuzzleSchema,
+  CoinSumPuzzleSchema,
+  ClockReadPuzzleSchema,
+]);
+
+export const FinalQuestionSchema = z
+  .object({
+    question: NonEmpty,
+    options: z.array(IdSchema).min(2),
+    correctSuspectId: IdSchema,
+    correctRationale: z.array(NonEmpty).min(1),
+    wrongRationales: z
+      .array(
+        z
+          .object({
+            suspectId: IdSchema,
+            lines: z.array(NonEmpty).min(1),
+          })
+          .strict()
+      )
+      .optional(),
+  })
+  .strict();
+
+export const RevealSchema = z
+  .object({
+    correct: z
+      .object({
+        headline: NonEmpty,
+        bodyParagraphs: z.array(NonEmpty).min(1),
+        cutsceneKey: NonEmpty.optional(),
+        sfxKey: NonEmpty.optional(),
+      })
+      .strict(),
+    incorrect: z
+      .object({
+        headline: NonEmpty,
+        bodyParagraphs: z.array(NonEmpty).min(1),
+      })
+      .strict(),
+  })
+  .strict();
+
+export const RewardStickerSchema = z
+  .object({
+    id: IdSchema,
+    name: NonEmpty,
+    spriteKey: NonEmpty,
+    rarity: z.enum(["common", "rare", "legendary"]).default("common"),
+  })
+  .strict();
+
+export const RewardBadgeSchema = z
+  .object({
+    id: IdSchema,
+    name: NonEmpty,
+    description: NonEmpty,
+    iconKey: NonEmpty,
+  })
+  .strict();
+
+export const RewardsSchema = z
+  .object({
+    xp: z.number().int().min(0).default(0),
+    stickers: z.array(RewardStickerSchema).default([]),
+    badges: z.array(RewardBadgeSchema).default([]),
+  })
+  .strict();
+
+export const CaseSchema = z
+  .object({
+    version: z.literal(1),
+    caseId: IdSchema,
+    orderIndex: z.number().int().min(1),
+    title: NonEmpty,
+    summary: NonEmpty,
+    difficultyBand: DifficultyBandSchema,
+    estimatedMinutes: z.number().int().min(1).max(60),
+    introLetter: LetterSchema,
+
+    suspects: z.array(SuspectSchema).min(2),
+    locations: z.array(LocationSchema).min(1),
+    evidence: z.array(EvidenceSchema).min(1),
+    puzzles: z.array(PuzzleSchema).min(1),
+
+    finalQuestion: FinalQuestionSchema,
+    reveal: RevealSchema,
+    rewards: RewardsSchema,
+
+    unlockNextCaseIds: z.array(IdSchema).default([]),
+  })
+  .strict()
+  .superRefine((c, ctx) => {
+    const uniq = (arr: string[]) => new Set(arr).size === arr.length;
+
+    const suspectIds = c.suspects.map((s) => s.id);
+    if (!uniq(suspectIds)) ctx.addIssue({ code: "custom", message: "Duplicate suspect.id found." });
+
+    const evidenceIds = c.evidence.map((e) => e.id);
+    if (!uniq(evidenceIds)) ctx.addIssue({ code: "custom", message: "Duplicate evidence.id found." });
+
+    const puzzleIds = c.puzzles.map((p) => p.id);
+    if (!uniq(puzzleIds)) ctx.addIssue({ code: "custom", message: "Duplicate puzzle.id found." });
+
+    const evidenceSet = new Set(evidenceIds);
+    for (const p of c.puzzles) {
+      if (!evidenceSet.has(p.unlocksEvidenceId)) {
+        ctx.addIssue({
+          code: "custom",
+          message: `Puzzle ${p.id} unlocksEvidenceId "${p.unlocksEvidenceId}" does not exist in evidence[].`,
+        });
+      }
+    }
+
+    const suspectSet = new Set(suspectIds);
+    for (const sid of c.finalQuestion.options) {
+      if (!suspectSet.has(sid)) {
+        ctx.addIssue({
+          code: "custom",
+          message: `finalQuestion.options contains unknown suspectId "${sid}".`,
+        });
+      }
+    }
+    if (!suspectSet.has(c.finalQuestion.correctSuspectId)) {
+      ctx.addIssue({
+        code: "custom",
+        message: `finalQuestion.correctSuspectId "${c.finalQuestion.correctSuspectId}" not found in suspects[].`,
+      });
+    }
+    if (!c.finalQuestion.options.includes(c.finalQuestion.correctSuspectId)) {
+      ctx.addIssue({
+        code: "custom",
+        message: `finalQuestion.correctSuspectId must be included in finalQuestion.options.`,
+      });
+    }
+  });
+
+export type CaseContent = z.infer<typeof CaseSchema>;
+export type PuzzleContent = z.infer<typeof PuzzleSchema>;

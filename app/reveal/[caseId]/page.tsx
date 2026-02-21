@@ -1,9 +1,18 @@
 import Link from "next/link";
-import { getCaseById } from "@/lib/content";
+import { getAllCases, getCaseById } from "@/lib/content";
 import { RevealClient } from "@/components/reveal/RevealClient";
 
-export default function RevealPage({ params }: { params: { caseId: string } }) {
-  const c = getCaseById(params.caseId);
+export function generateStaticParams() {
+  try {
+    return getAllCases().map((c) => ({ caseId: c.caseId }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function RevealPage({ params }: { params: Promise<{ caseId: string }> }) {
+  const { caseId } = await params;
+  const c = getCaseById(caseId);
   if (!c) {
     return (
       <div className="grid gap-2">

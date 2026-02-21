@@ -1,8 +1,17 @@
-import { getCaseById } from "@/lib/content";
+import { getAllCases, getCaseById } from "@/lib/content";
 import { CaseClient } from "@/components/case/CaseClient";
 
-export default function CasePage({ params }: { params: { caseId: string } }) {
-  const c = getCaseById(params.caseId);
+export function generateStaticParams() {
+  try {
+    return getAllCases().map((c) => ({ caseId: c.caseId }));
+  } catch {
+    return [];
+  }
+}
+
+export default async function CasePage({ params }: { params: Promise<{ caseId: string }> }) {
+  const { caseId } = await params;
+  const c = getCaseById(caseId);
   if (!c) {
     return (
       <div className="grid gap-3">
