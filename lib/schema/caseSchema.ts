@@ -16,6 +16,7 @@ export const TopicKeySchema = z.enum([
   "mul_div",
   "money",
   "time",
+  "geometry",
   "fractions",
   "decimals",
   "percent",
@@ -291,6 +292,139 @@ const ClockReadPuzzleSchema = PuzzleBaseSchema.extend({
   params: ClockReadParamsSchema,
 }).strict();
 
+// PERIMETER_WALK (geometry)
+const PerimeterSegmentSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    length: z.number().int().min(1),
+    spriteKey: NonEmpty.optional(),
+  })
+  .strict();
+
+const PerimeterWalkParamsSchema = z
+  .object({
+    segments: z.array(PerimeterSegmentSchema).min(4).max(12),
+    correctPerimeter: z.number().int().min(1),
+    unitLabel: NonEmpty.default("units"),
+  })
+  .strict()
+  .superRefine((p, ctx) => {
+    const sum = p.segments.reduce((acc, s) => acc + s.length, 0);
+    if (p.correctPerimeter !== sum) {
+      ctx.addIssue({
+        code: "custom",
+        message: `correctPerimeter should equal sum(segments) = ${sum}.`,
+      });
+    }
+  });
+
+const PerimeterWalkPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("PERIMETER_WALK"),
+  params: PerimeterWalkParamsSchema,
+}).strict();
+
+// AREA_RECT_BUILDER (geometry)
+const AreaRectBuilderParamsSchema = z
+  .object({
+    targetArea: z.number().int().min(1),
+    rowsMin: z.number().int().min(1),
+    rowsMax: z.number().int().min(1),
+    colsMin: z.number().int().min(1),
+    colsMax: z.number().int().min(1),
+    requiredPerimeter: z.number().int().min(1).optional(),
+    unitLabel: NonEmpty.default("square units"),
+  })
+  .strict()
+  .superRefine((p, ctx) => {
+    if (p.rowsMax < p.rowsMin) {
+      ctx.addIssue({ code: "custom", message: "rowsMax must be >= rowsMin" });
+    }
+    if (p.colsMax < p.colsMin) {
+      ctx.addIssue({ code: "custom", message: "colsMax must be >= colsMin" });
+    }
+
+    // Feasibility check: can we hit targetArea within ranges?
+    let feasible = false;
+    for (let r = p.rowsMin; r <= p.rowsMax; r++) {
+      for (let c = p.colsMin; c <= p.colsMax; c++) {
+        if (r * c !== p.targetArea) continue;
+        if (typeof p.requiredPerimeter === "number" && 2 * (r + c) !== p.requiredPerimeter) continue;
+        feasible = true;
+      }
+    }
+    if (!feasible) {
+      ctx.addIssue({
+        code: "custom",
+        message: "No rectangle in the given ranges satisfies targetArea (and requiredPerimeter if provided).",
+      });
+    }
+  });
+
+const AreaRectBuilderPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("AREA_RECT_BUILDER"),
+  params: AreaRectBuilderParamsSchema,
+}).strict();
+
+// ANGLE_CLASSIFY (geometry)
+const AngleLabelSchema = z.enum(["acute", "right", "obtuse"]);
+
+const AngleRoundSchema = z
+  .object({
+    id: IdSchema,
+    degrees: z.number().int().min(10).max(170),
+    prompt: NonEmpty,
+    options: z.array(AngleLabelSchema).min(2).max(3),
+    correctOption: AngleLabelSchema,
+  })
+  .strict()
+  .superRefine((r, ctx) => {
+    if (!r.options.includes(r.correctOption)) {
+      ctx.addIssue({ code: "custom", message: `round ${r.id}: correctOption must be in options` });
+    }
+  });
+
+const AngleClassifyParamsSchema = z
+  .object({
+    rounds: z.array(AngleRoundSchema).min(3).max(6),
+    showDegrees: z.boolean().default(false),
+  })
+  .strict();
+
+const AngleClassifyPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("ANGLE_CLASSIFY"),
+  params: AngleClassifyParamsSchema,
+}).strict();
+
+// SYMMETRY_PICK (geometry)
+const SymmetryOptionSchema = z.enum(["vertical", "horizontal", "diagonal_left", "diagonal_right", "none"]);
+
+const SymmetryRoundSchema = z
+  .object({
+    id: IdSchema,
+    doodleKey: NonEmpty,
+    prompt: NonEmpty,
+    options: z.array(SymmetryOptionSchema).min(2).max(5),
+    correctOption: SymmetryOptionSchema,
+  })
+  .strict()
+  .superRefine((r, ctx) => {
+    if (!r.options.includes(r.correctOption)) {
+      ctx.addIssue({ code: "custom", message: `round ${r.id}: correctOption must be in options` });
+    }
+  });
+
+const SymmetryPickParamsSchema = z
+  .object({
+    rounds: z.array(SymmetryRoundSchema).min(3).max(6),
+  })
+  .strict();
+
+const SymmetryPickPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("SYMMETRY_PICK"),
+  params: SymmetryPickParamsSchema,
+}).strict();
+
 // FRACTION_PIE_SUM (fractions)
 const FractionSliceSchema = z
   .object({
@@ -456,6 +590,10 @@ export const PuzzleSchema = z.discriminatedUnion("type", [
   NumberInputQuizPuzzleSchema,
   CoinSumPuzzleSchema,
   ClockReadPuzzleSchema,
+  PerimeterWalkPuzzleSchema,
+  AreaRectBuilderPuzzleSchema,
+  AngleClassifyPuzzleSchema,
+  SymmetryPickPuzzleSchema,
   FractionPieSumPuzzleSchema,
   DecimalNumberLinePuzzleSchema,
   PercentSprinklePuzzleSchema,

@@ -1,0 +1,381 @@
+{
+  "version": 1,
+  "caseId": "case_004_the_wobbly_geometry_gala",
+  "orderIndex": 4,
+  "title": "The Case of the Wobbly Geometry Gala",
+  "summary": "The town’s fancy Geometry Gala decorations have gone FULL GOBLIN: frames are crooked, angles are lying, and a butterfly banner is somehow… asymmetrical. Solve four geometry clues (perimeter, area, angles, symmetry) to catch the goofball.",
+  "difficultyBand": 4,
+  "estimatedMinutes": 18,
+  "introLetter": {
+    "fromName": "Museum Curator Prism McShimmer",
+    "toName": "Detective (You)",
+    "subjectLine": "HELP. The Geometry Gala is tonight and the SHAPES are doing crimes.",
+    "bodyParagraphs": [
+      "Detective!",
+      "Tonight is the annual Geometry Gala (very fancy, very sparkly, very ‘please do not lick the exhibits’).",
+      "But this morning, someone replaced our perfect decorations with wobbly impostors:",
+      "• the perimeter fence is missing a chunk (or… is it?)",
+      "• the stage blueprint has been ‘optimized’ by a raccoon with a marker",
+      "• the angle posters are labeled with lies",
+      "• the giant butterfly banner is… NOT symmetrical. That is illegal in 43 countries (made-up ones).",
+      "Three suspects were seen carrying rulers and giggling like villains in a cartoon.",
+      "Please solve the clues before the gala begins and the triangle tries to run for mayor."
+    ],
+    "signature": "Sincerely,\nCurator Prism McShimmer\n(Director of Shapes, Keeper of the Very Serious Protractor)",
+    "postmark": {
+      "city": "Goofington",
+      "dateISO": "2026-02-25",
+      "stampSlogan": "Goofington Postal Service: We Deliver Mail. The Shapes Deliver CHAOS."
+    }
+  },
+  "suspects": [
+    {
+      "id": "s1_duchess_diagonal",
+      "name": "Duchess Diagonal",
+      "roleTagline": "Ribbon Baroness & Professional Side-Eye",
+      "portraitKey": "portrait_duchess_diagonal",
+      "alibi": {
+        "claim": "Symmetry is easy. The butterfly banner is totally symmetrical… horizontally.",
+        "note": "Butterflies usually mirror left/right, not top/bottom. Hmmm."
+      },
+      "quips": [
+        "I only cut things diagonally. It’s a lifestyle.",
+        "If you see a straight line… no you didn’t.",
+        "I’m not suspicious. I’m *aesthetic*."
+      ]
+    },
+    {
+      "id": "s2_professor_angleton",
+      "name": "Professor Angleton",
+      "roleTagline": "Angle Expert & Unlicensed Label Maker",
+      "portraitKey": "portrait_professor_angleton",
+      "alibi": {
+        "claim": "That big wide angle? Very acute. Extremely acute. The acutest.",
+        "note": "Overconfidence detected. Possibly powered by protractor fumes."
+      },
+      "quips": [
+        "I don’t make mistakes. I make ‘alternate realities’.",
+        "90 degrees is a rumor.",
+        "Obtuse? I prefer the term ‘emotionally spacious’."
+      ]
+    },
+    {
+      "id": "s3_captain_perimeter_pete",
+      "name": "Captain Perimeter Pete",
+      "roleTagline": "Fence Enthusiast & Tape-Measure Whisperer",
+      "portraitKey": "portrait_captain_perimeter_pete",
+      "alibi": {
+        "claim": "The fence walk is 22 steps around. I counted. Twice. While eating a hotdog.",
+        "note": "Counting while hotdogging is historically unreliable."
+      },
+      "quips": [
+        "Perimeter is just a hug for a shape.",
+        "I measure things with confidence, not accuracy.",
+        "My tape measure is named Gerald. Gerald is judgey."
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "l1_geometry_museum",
+      "name": "The Museum of Extremely Serious Shapes",
+      "backgroundKey": "bg_geometry_museum",
+      "description": "Sparkly exhibits, velvet ropes, and one suspiciously sticky protractor."
+    },
+    {
+      "id": "l2_gala_stage",
+      "name": "The Gala Stage (currently wobbly)",
+      "backgroundKey": "bg_gala_stage",
+      "description": "Blueprints on the floor, confetti everywhere, and a rectangle acting innocent."
+    },
+    {
+      "id": "l3_banner_hall",
+      "name": "Banner Hall of Symmetry (now in chaos)",
+      "backgroundKey": "bg_banner_hall",
+      "description": "A giant butterfly banner that looks like it sneezed halfway through being printed."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e1_perimeter_tape",
+      "label": "Gerald’s Tape-Measure Receipt",
+      "description": "A crinkled strip of tape with segment lengths marked in angry little numbers.",
+      "spriteKey": "sticker_perimeter_tape"
+    },
+    {
+      "id": "e2_blueprint_smudge",
+      "label": "Blueprint Smudge of Doom",
+      "description": "A rectangle blueprint with coffee stains and the words ‘AREA?? PERIMETER?? VIBES??’.",
+      "spriteKey": "sticker_blueprint_smudge"
+    },
+    {
+      "id": "e3_protractor_print",
+      "label": "Bubble-Wrapped Protractor Print",
+      "description": "A protractor impression… plus bubbles popped at exactly the wrong angles.",
+      "spriteKey": "sticker_protractor_print"
+    },
+    {
+      "id": "e4_mirror_smear",
+      "label": "Mirror Smear Sticker",
+      "description": "A handprint on a tiny mirror. Someone tested symmetry… aggressively.",
+      "spriteKey": "sticker_mirror_smear"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "p1_perimeter_walk",
+      "type": "PERIMETER_WALK",
+      "title": "Fence Walk of Doom",
+      "prompt": "Walk the fence segments and find the total perimeter.",
+      "topicKey": "geometry",
+      "difficulty": 2,
+      "seed": 401,
+      "points": 12,
+      "unlocksEvidenceId": "e1_perimeter_tape",
+      "ui": {
+        "introLine": "Count each side. No teleporting. No wormholes.",
+        "successQuips": [
+          "Perimeter captured! The fence stops screaming.",
+          "You measured it so hard the numbers got nervous.",
+          "Gerald the tape measure nods respectfully."
+        ],
+        "failQuips": [
+          "That’s not the perimeter… that’s a *perim-eh-ter*.",
+          "The fence giggled. That’s bad.",
+          "You missed a side. Or invented one. Either way: chaos."
+        ]
+      },
+      "hints": [
+        "Perimeter means the distance *around* the shape.",
+        "Add every side length once.",
+        "Try tapping each segment in order to make a scratch total."
+      ],
+      "params": {
+        "unitLabel": "steps",
+        "segments": [
+          { "id": "seg_a", "label": "Right (past the jelly statue)", "length": 3 },
+          { "id": "seg_b", "label": "Up (avoid the puddle)", "length": 5 },
+          { "id": "seg_c", "label": "Left (through confetti)", "length": 2 },
+          { "id": "seg_d", "label": "Down (past the suspicious bench)", "length": 4 },
+          { "id": "seg_e", "label": "Left (toward the snack table)", "length": 1 },
+          { "id": "seg_f", "label": "Down (do NOT fall into math)", "length": 5 }
+        ],
+        "correctPerimeter": 20
+      }
+    },
+    {
+      "id": "p2_area_builder",
+      "type": "AREA_RECT_BUILDER",
+      "title": "Stage Blueprint Builder",
+      "prompt": "Build a rectangle stage with the correct area (and maybe perimeter).",
+      "topicKey": "geometry",
+      "difficulty": 3,
+      "seed": 402,
+      "points": 14,
+      "unlocksEvidenceId": "e2_blueprint_smudge",
+      "ui": {
+        "introLine": "Pick rows and columns. Make the stage legal for dancing.",
+        "successQuips": [
+          "Blueprint approved! The stage stops wobbling (mostly).",
+          "Perfect rectangle. The confetti applauds.",
+          "Area achieved. Perimeter satisfied. Geometry feels seen."
+        ],
+        "failQuips": [
+          "That stage is… mathematically haunted.",
+          "Area is off. The dancers are sliding into the void.",
+          "Nice rectangle, but the blueprint whispers ‘NO’."
+        ]
+      },
+      "hints": [
+        "Area of a rectangle = rows × columns.",
+        "If a perimeter rule appears, perimeter = 2 × (rows + columns).",
+        "Try factor pairs for the target area (like 4×6 for 24)."
+      ],
+      "params": {
+        "targetArea": 24,
+        "rowsMin": 2,
+        "rowsMax": 6,
+        "colsMin": 2,
+        "colsMax": 8,
+        "requiredPerimeter": 20,
+        "unitLabel": "square tiles"
+      }
+    },
+    {
+      "id": "p3_angle_classify",
+      "type": "ANGLE_CLASSIFY",
+      "title": "Poster of Lying Angles",
+      "prompt": "Label each angle as acute, right, or obtuse.",
+      "topicKey": "geometry",
+      "difficulty": 3,
+      "seed": 403,
+      "points": 14,
+      "unlocksEvidenceId": "e3_protractor_print",
+      "ui": {
+        "introLine": "Angles can’t all be acute, Professor.",
+        "successQuips": [
+          "Angle truth restored! The posters stop gaslighting you.",
+          "Correct! The protractor exhales.",
+          "You classified angles with the confidence of a wizard." 
+        ],
+        "failQuips": [
+          "That label is… geometrically suspicious.",
+          "The angle disagrees and files a complaint.",
+          "Nope. The protractor just facepalmed." 
+        ]
+      },
+      "hints": [
+        "Acute is less than 90°.",
+        "Right is exactly 90° (a perfect corner).",
+        "Obtuse is more than 90° (wide and comfy)."
+      ],
+      "params": {
+        "showDegrees": false,
+        "rounds": [
+          {
+            "id": "a1",
+            "degrees": 35,
+            "prompt": "This angle is small and pointy. What is it?",
+            "options": ["acute", "right", "obtuse"],
+            "correctOption": "acute"
+          },
+          {
+            "id": "a2",
+            "degrees": 90,
+            "prompt": "This angle is a perfect corner. What is it?",
+            "options": ["acute", "right", "obtuse"],
+            "correctOption": "right"
+          },
+          {
+            "id": "a3",
+            "degrees": 130,
+            "prompt": "This angle is wide enough to park a tiny scooter in. What is it?",
+            "options": ["acute", "right", "obtuse"],
+            "correctOption": "obtuse"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p4_symmetry_pick",
+      "type": "SYMMETRY_PICK",
+      "title": "Butterfly Banner Symmetry Scan",
+      "prompt": "Pick the line of symmetry (or admit there is none).",
+      "topicKey": "geometry",
+      "difficulty": 2,
+      "seed": 404,
+      "points": 12,
+      "unlocksEvidenceId": "e4_mirror_smear",
+      "ui": {
+        "introLine": "Find the mirror line. Avoid emotional mirrors.",
+        "successQuips": [
+          "Symmetry secured! The banner stops looking insulted.",
+          "Perfect mirror line. The doodle feels balanced.",
+          "Nice! Even the mirror is impressed." 
+        ],
+        "failQuips": [
+          "That line made it worse. Somehow.",
+          "The doodle is still lopsided. It’s judging you.",
+          "Mirror says: ‘nope’." 
+        ]
+      },
+      "hints": [
+        "A line of symmetry splits a shape into two matching halves.",
+        "Try folding it in your mind (or imagine a mirror).",
+        "Some shapes have no symmetry at all — that’s allowed."
+      ],
+      "params": {
+        "rounds": [
+          {
+            "id": "s1",
+            "doodleKey": "butterfly",
+            "prompt": "Which mirror line makes the butterfly match itself?",
+            "options": ["vertical", "horizontal", "none"],
+            "correctOption": "vertical"
+          },
+          {
+            "id": "s2",
+            "doodleKey": "staircase",
+            "prompt": "This staircase doodle: does it have a mirror line?",
+            "options": ["vertical", "diagonal_right", "none"],
+            "correctOption": "none"
+          },
+          {
+            "id": "s3",
+            "doodleKey": "kite",
+            "prompt": "Which mirror line makes the kite match itself?",
+            "options": ["vertical", "horizontal", "diagonal_left"],
+            "correctOption": "vertical"
+          }
+        ]
+      }
+    }
+  ],
+  "finalQuestion": {
+    "question": "Who sabotaged the Geometry Gala with wobbly labels and chaotic shapes?",
+    "options": ["s1_duchess_diagonal", "s2_professor_angleton", "s3_captain_perimeter_pete"],
+    "correctSuspectId": "s2_professor_angleton",
+    "correctRationale": [
+      "The protractor print shows the wide angle is obtuse, but Professor Angleton insisted it was ‘very acute’.",
+      "The angle posters were mislabeled in the same confident handwriting style as his ‘alternate realities’.",
+      "Once the angle lies were fixed, the rest of the decorations matched the official museum records."
+    ],
+    "wrongRationales": [
+      {
+        "suspectId": "s1_duchess_diagonal",
+        "lines": [
+          "Duchess Diagonal said ‘horizontal symmetry’ for the butterfly, which is wrong…",
+          "…but the biggest sabotage was the angle labels, and that points to someone else."
+        ]
+      },
+      {
+        "suspectId": "s3_captain_perimeter_pete",
+        "lines": [
+          "Perimeter Pete counted the fence wrong, sure…",
+          "…but the gala didn’t collapse until the angles were labeled with lies."
+        ]
+      }
+    ]
+  },
+  "reveal": {
+    "correct": {
+      "headline": "CASE CLOSED: The Angles Were Gaslit!",
+      "bodyParagraphs": [
+        "You slam the evidence on the table (gently, because it’s a museum table).",
+        "Professor Angleton’s ‘acute obtuse’ labeling scheme collapses instantly under the power of a correctly used protractor.",
+        "He tries to escape by turning sideways (like a very thin rectangle), but security politely escorts him into the Gift Shop of Consequences.",
+        "The Geometry Gala proceeds safely. The butterfly banner forgives everyone. The triangle does NOT become mayor."
+      ],
+      "cutsceneKey": "cutscene_geometry_confetti",
+      "sfxKey": "sfx_case_closed"
+    },
+    "incorrect": {
+      "headline": "WRONG SUSPECT: The Shapes Continue Their Crimes",
+      "bodyParagraphs": [
+        "Your accusation echoes across the museum… and the angles laugh.",
+        "Somewhere, a protractor spins dramatically.",
+        "Try again—one suspect’s story doesn’t match the geometry evidence." 
+      ]
+    }
+  },
+  "rewards": {
+    "xp": 70,
+    "stickers": [
+      {
+        "id": "reward_sticker_geometry_goblin",
+        "name": "Geometry Goblin (Reformed)",
+        "spriteKey": "reward_sticker_geometry_goblin",
+        "rarity": "rare"
+      }
+    ],
+    "badges": [
+      {
+        "id": "badge_geo_detective",
+        "name": "Geo Detective",
+        "description": "Solved the Wobbly Geometry Gala without letting the triangle run for office.",
+        "iconKey": "badge_geo_detective"
+      }
+    ]
+  },
+  "unlockNextCaseIds": []
+}

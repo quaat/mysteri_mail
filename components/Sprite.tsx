@@ -17,6 +17,11 @@ const emojiMap: Record<string, string> = {
   portrait_professor_decimalton: "🧪📏",
   portrait_captain_percentula: "🦸‍♂️💯",
 
+  // Case 4 suspects
+  portrait_duchess_diagonal: "👸📐",
+  portrait_professor_angleton: "🧑‍🏫📐",
+  portrait_captain_perimeter_pete: "🧢🧵",
+
   // Evidence
   sticker_postage_receipt: "🧾",
   sticker_balanced_bags: "⚖️",
@@ -33,6 +38,12 @@ const emojiMap: Record<string, string> = {
   sticker_number_line_smear: "📏💦",
   sticker_percent_splatter: "🎨%",
   sticker_trio_chart: "🧩🔁",
+
+  // Case 4 evidence
+  sticker_perimeter_tape: "🧵📏",
+  sticker_blueprint_smudge: "📐🗺️",
+  sticker_protractor_print: "📐🫧",
+  sticker_mirror_smear: "🪞🫳",
 
   // Fraction slices / items
   slice_1_8: "🥧",
@@ -96,6 +107,10 @@ const emojiMap: Record<string, string> = {
   // Case 3 rewards
   reward_sticker_pie_tie: "🥧👔",
   badge_fraction_detective: "🔎🍰",
+
+  // Case 4 rewards
+  reward_sticker_geometry_goblin: "👺📐",
+  badge_geo_detective: "🧭📐",
 };
 
 export function Sprite({

@@ -5,6 +5,7 @@ import { validatePuzzle } from "@/lib/puzzle/validate";
 import case1 from "@/content/cases/case_001_ferret_mustache.json";
 import case2 from "@/content/cases/case_002_banana_in_the_mailbox.json";
 import case3 from "@/content/cases/case_003_the_missing_pie_chart.json";
+import case4 from "@/content/cases/case_004_the_wobbly_geometry_gala.json";
 
 describe("case content schemas", () => {
   it("parses case 001", () => {
@@ -20,6 +21,11 @@ describe("case content schemas", () => {
   it("parses case 003", () => {
     const parsed = CaseSchema.parse(case3);
     expect(parsed.caseId).toBe("case_003_the_missing_pie_chart");
+  });
+
+  it("parses case 004", () => {
+    const parsed = CaseSchema.parse(case4);
+    expect(parsed.caseId).toBe("case_004_the_wobbly_geometry_gala");
   });
 });
 
@@ -84,6 +90,34 @@ describe("puzzle validators", () => {
         { fractionId: "f_tenth", decimalId: "d_tenth", percentId: "p_tenth" },
       ],
     });
+    expect(res.correct).toBe(true);
+  });
+
+  it("validates PERIMETER_WALK", () => {
+    const c = CaseSchema.parse(case4);
+    const p = c.puzzles.find((x) => x.id === "p1_perimeter_walk")!;
+    const res = validatePuzzle(p, 20);
+    expect(res.correct).toBe(true);
+  });
+
+  it("validates AREA_RECT_BUILDER", () => {
+    const c = CaseSchema.parse(case4);
+    const p = c.puzzles.find((x) => x.id === "p2_area_builder")!;
+    const res = validatePuzzle(p, { rows: 4, cols: 6 });
+    expect(res.correct).toBe(true);
+  });
+
+  it("validates ANGLE_CLASSIFY", () => {
+    const c = CaseSchema.parse(case4);
+    const p = c.puzzles.find((x) => x.id === "p3_angle_classify")!;
+    const res = validatePuzzle(p, { answers: { a1: "acute", a2: "right", a3: "obtuse" } });
+    expect(res.correct).toBe(true);
+  });
+
+  it("validates SYMMETRY_PICK", () => {
+    const c = CaseSchema.parse(case4);
+    const p = c.puzzles.find((x) => x.id === "p4_symmetry_pick")!;
+    const res = validatePuzzle(p, { answers: { s1: "vertical", s2: "none", s3: "vertical" } });
     expect(res.correct).toBe(true);
   });
 });

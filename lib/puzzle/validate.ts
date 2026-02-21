@@ -190,6 +190,88 @@ export function validatePuzzle(puzzle: PuzzleContent, answer: unknown): Validati
       return { correct: true, message: "Clock cracked!", meta: { wrong } };
     }
 
+    case "PERIMETER_WALK": {
+      const raw = typeof answer === "number" ? answer : typeof answer === "string" ? Number(answer) : NaN;
+      if (!Number.isFinite(raw)) return { correct: false, message: "Type a number for the perimeter." };
+
+      const expected = puzzle.params.correctPerimeter;
+      if (raw !== expected) {
+        const diff = expected - raw;
+        const hint = diff > 0 ? `You are ${diff} too low.` : `You are ${Math.abs(diff)} too high.`;
+        return { correct: false, message: `Not quite. ${hint}`, meta: { expected } };
+      }
+      return { correct: true, message: "Perimeter captured!", meta: { expected } };
+    }
+
+    case "AREA_RECT_BUILDER": {
+      const a = answer as { rows?: number; cols?: number };
+      const rows = typeof a?.rows === "number" ? a.rows : NaN;
+      const cols = typeof a?.cols === "number" ? a.cols : NaN;
+      if (!Number.isFinite(rows) || !Number.isFinite(cols)) {
+        return { correct: false, message: "Pick rows and columns for your rectangle." };
+      }
+
+      const { targetArea, requiredPerimeter } = puzzle.params;
+      const area = rows * cols;
+      if (area !== targetArea) {
+        return { correct: false, message: `Area is ${area}, but target is ${targetArea}.`, meta: { area } };
+      }
+      if (typeof requiredPerimeter === "number") {
+        const per = 2 * (rows + cols);
+        if (per !== requiredPerimeter) {
+          return {
+            correct: false,
+            message: `Area matches, but perimeter is ${per}. Need ${requiredPerimeter}.`,
+            meta: { per },
+          };
+        }
+      }
+
+      return { correct: true, message: "Blueprint approved!", meta: { area } };
+    }
+
+    case "ANGLE_CLASSIFY": {
+      const a = answer as { answers?: Record<string, string> };
+      const answers = a?.answers ?? {};
+
+      let wrong = 0;
+      for (const r of puzzle.params.rounds) {
+        const got = answers[r.id];
+        if (typeof got !== "string" || got !== r.correctOption) wrong++;
+      }
+
+      if (wrong > 0) {
+        return {
+          correct: false,
+          message: `Angle alert! ${wrong} choice${wrong === 1 ? "" : "s"} off.`,
+          meta: { wrong },
+        };
+      }
+
+      return { correct: true, message: "Angles identified!", meta: { wrong } };
+    }
+
+    case "SYMMETRY_PICK": {
+      const a = answer as { answers?: Record<string, string> };
+      const answers = a?.answers ?? {};
+
+      let wrong = 0;
+      for (const r of puzzle.params.rounds) {
+        const got = answers[r.id];
+        if (typeof got !== "string" || got !== r.correctOption) wrong++;
+      }
+
+      if (wrong > 0) {
+        return {
+          correct: false,
+          message: `Mirror, mirror… ${wrong} doodle${wrong === 1 ? "" : "s"} still lopsided.`,
+          meta: { wrong },
+        };
+      }
+
+      return { correct: true, message: "Symmetry secured!", meta: { wrong } };
+    }
+
     case "FRACTION_PIE_SUM": {
       const selectedIds = Array.isArray(answer) ? (answer as string[]) : [];
       const { denominator, targetNumerator, slices, constraints } = puzzle.params;

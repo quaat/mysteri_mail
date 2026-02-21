@@ -21,6 +21,10 @@ import { EvidenceTapePathPuzzle } from "@/components/puzzles/EvidenceTapePathPuz
 import { NumberInputQuizPuzzle } from "@/components/puzzles/NumberInputQuizPuzzle";
 import { CoinSumPuzzle } from "@/components/puzzles/CoinSumPuzzle";
 import { ClockReadPuzzle } from "@/components/puzzles/ClockReadPuzzle";
+import { PerimeterWalkPuzzle } from "@/components/puzzles/PerimeterWalkPuzzle";
+import { AreaRectBuilderPuzzle } from "@/components/puzzles/AreaRectBuilderPuzzle";
+import { AngleClassifyPuzzle } from "@/components/puzzles/AngleClassifyPuzzle";
+import { SymmetryPickPuzzle } from "@/components/puzzles/SymmetryPickPuzzle";
 import { FractionPieSumPuzzle } from "@/components/puzzles/FractionPieSumPuzzle";
 import { DecimalNumberLinePuzzle } from "@/components/puzzles/DecimalNumberLinePuzzle";
 import { PercentSprinklePuzzle } from "@/components/puzzles/PercentSprinklePuzzle";
@@ -133,6 +137,14 @@ export function PuzzleClient({ c, p }: { c: CaseContent; p: PuzzleContent }) {
               <CoinSumPuzzle puzzle={p} onSubmit={onSubmit} />
             ) : p.type === "CLOCK_READ" ? (
               <ClockReadPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "PERIMETER_WALK" ? (
+              <PerimeterWalkPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "AREA_RECT_BUILDER" ? (
+              <AreaRectBuilderPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "ANGLE_CLASSIFY" ? (
+              <AngleClassifyPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "SYMMETRY_PICK" ? (
+              <SymmetryPickPuzzle puzzle={p} onSubmit={onSubmit} />
             ) : p.type === "FRACTION_PIE_SUM" ? (
               <FractionPieSumPuzzle puzzle={p} onSubmit={onSubmit} />
             ) : p.type === "DECIMAL_NUMBER_LINE" ? (

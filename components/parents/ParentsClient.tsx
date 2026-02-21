@@ -16,6 +16,7 @@ export function ParentsClient() {
     { key: "mul_div", label: "Multiplication / Division" },
     { key: "money", label: "Money" },
     { key: "time", label: "Analog Time" },
+    { key: "geometry", label: "Geometry" },
     { key: "fractions", label: "Fractions" },
     { key: "decimals", label: "Decimals" },
     { key: "percent", label: "Percent" },

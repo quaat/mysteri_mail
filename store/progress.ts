@@ -34,6 +34,7 @@ const emptyTopicStats = (): Record<TopicKey, TopicStats> => ({
   mul_div: { attempts: 0, correct: 0, streak: 0 },
   money: { attempts: 0, correct: 0, streak: 0 },
   time: { attempts: 0, correct: 0, streak: 0 },
+  geometry: { attempts: 0, correct: 0, streak: 0 },
   fractions: { attempts: 0, correct: 0, streak: 0 },
   decimals: { attempts: 0, correct: 0, streak: 0 },
   percent: { attempts: 0, correct: 0, streak: 0 },
