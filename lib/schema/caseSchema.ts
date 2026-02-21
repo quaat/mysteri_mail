@@ -11,7 +11,16 @@ export const DifficultyBandSchema = z.union([
   z.literal(5),
 ]);
 
-export const TopicKeySchema = z.enum(["add_sub", "mul_div", "money", "time", "mixed"]);
+export const TopicKeySchema = z.enum([
+  "add_sub",
+  "mul_div",
+  "money",
+  "time",
+  "fractions",
+  "decimals",
+  "percent",
+  "mixed",
+]);
 
 export const EvidenceSchema = z
   .object({
@@ -282,6 +291,163 @@ const ClockReadPuzzleSchema = PuzzleBaseSchema.extend({
   params: ClockReadParamsSchema,
 }).strict();
 
+// FRACTION_PIE_SUM (fractions)
+const FractionSliceSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    numerator: z.number().int().min(1),
+    spriteKey: NonEmpty,
+  })
+  .strict();
+
+const FractionPieSumParamsSchema = z
+  .object({
+    denominator: z.number().int().min(2).max(24),
+    targetNumerator: z.number().int().min(1),
+    slices: z.array(FractionSliceSchema).min(4),
+    constraints: z
+      .object({
+        maxSlices: z.number().int().min(1).max(12),
+        bonusFewestSlices: z.number().int().min(1).max(12).optional(),
+      })
+      .strict(),
+  })
+  .strict()
+  .superRefine((p, ctx) => {
+    if (p.targetNumerator >= p.denominator) {
+      ctx.addIssue({ code: "custom", message: "targetNumerator must be < denominator" });
+    }
+    for (const s of p.slices) {
+      if (s.numerator >= p.denominator) {
+        ctx.addIssue({ code: "custom", message: `slice ${s.id} numerator must be < denominator` });
+      }
+    }
+  });
+
+const FractionPieSumPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("FRACTION_PIE_SUM"),
+  params: FractionPieSumParamsSchema,
+}).strict();
+
+// DECIMAL_NUMBER_LINE (decimals)
+const DecimalLineRoundSchema = z
+  .object({
+    id: IdSchema,
+    min: z.number(),
+    max: z.number(),
+    step: z.number().positive(),
+    target: z.number(),
+    prompt: NonEmpty,
+    showLabels: z.boolean().default(true),
+  })
+  .strict()
+  .superRefine((r, ctx) => {
+    if (!(r.max > r.min)) {
+      ctx.addIssue({ code: "custom", message: `round ${r.id}: max must be > min` });
+    }
+    if (r.target < r.min || r.target > r.max) {
+      ctx.addIssue({ code: "custom", message: `round ${r.id}: target must be within [min,max]` });
+    }
+  });
+
+const DecimalNumberLineParamsSchema = z
+  .object({
+    rounds: z.array(DecimalLineRoundSchema).min(3).max(6),
+    tolerance: z.number().nonnegative().default(0),
+  })
+  .strict();
+
+const DecimalNumberLinePuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("DECIMAL_NUMBER_LINE"),
+  params: DecimalNumberLineParamsSchema,
+}).strict();
+
+// PERCENT_SPRINKLE (percentages)
+const PercentSprinkleParamsSchema = z
+  .object({
+    totalItems: z.number().int().min(8).max(60),
+    targetPercent: z.number().int().min(5).max(95),
+    requiredCount: z.number().int().min(0),
+    itemSpriteKey: NonEmpty,
+    itemLabelSingular: NonEmpty,
+    itemLabelPlural: NonEmpty,
+    gridCols: z.number().int().min(4).max(10).default(6),
+  })
+  .strict()
+  .superRefine((p, ctx) => {
+    const computed = (p.totalItems * p.targetPercent) / 100;
+    if (!Number.isInteger(computed)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "totalItems * targetPercent must be divisible by 100 (so the answer is a whole number).",
+      });
+    }
+    if (Number.isInteger(computed) && p.requiredCount !== computed) {
+      ctx.addIssue({
+        code: "custom",
+        message: `requiredCount should be ${computed} for totalItems=${p.totalItems} and targetPercent=${p.targetPercent}.`,
+      });
+    }
+  });
+
+const PercentSprinklePuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("PERCENT_SPRINKLE"),
+  params: PercentSprinkleParamsSchema,
+}).strict();
+
+// FDP_TRIO_MATCH (fraction/decimal/percent matching)
+const FdpFractionSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    numerator: z.number().int().min(1),
+    denominator: z.number().int().min(2),
+  })
+  .strict()
+  .superRefine((f, ctx) => {
+    if (f.numerator >= f.denominator) {
+      ctx.addIssue({ code: "custom", message: `fraction ${f.id}: numerator must be < denominator` });
+    }
+  });
+
+const FdpDecimalSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    value: z.number(),
+  })
+  .strict();
+
+const FdpPercentSchema = z
+  .object({
+    id: IdSchema,
+    label: NonEmpty,
+    value: z.number(),
+  })
+  .strict();
+
+const FdpTrioSchema = z
+  .object({
+    id: IdSchema,
+    fraction: FdpFractionSchema,
+    decimal: FdpDecimalSchema,
+    percent: FdpPercentSchema,
+  })
+  .strict();
+
+const FdpTrioMatchParamsSchema = z
+  .object({
+    trios: z.array(FdpTrioSchema).min(3).max(6),
+    shuffleSeed: z.number().int().nonnegative().optional(),
+  })
+  .strict();
+
+const FdpTrioMatchPuzzleSchema = PuzzleBaseSchema.extend({
+  type: z.literal("FDP_TRIO_MATCH"),
+  params: FdpTrioMatchParamsSchema,
+}).strict();
+
 export const PuzzleSchema = z.discriminatedUnion("type", [
   StampSumPuzzleSchema,
   MailbagBalancePuzzleSchema,
@@ -290,6 +456,10 @@ export const PuzzleSchema = z.discriminatedUnion("type", [
   NumberInputQuizPuzzleSchema,
   CoinSumPuzzleSchema,
   ClockReadPuzzleSchema,
+  FractionPieSumPuzzleSchema,
+  DecimalNumberLinePuzzleSchema,
+  PercentSprinklePuzzleSchema,
+  FdpTrioMatchPuzzleSchema,
 ]);
 
 export const FinalQuestionSchema = z

@@ -16,6 +16,9 @@ export function ParentsClient() {
     { key: "mul_div", label: "Multiplication / Division" },
     { key: "money", label: "Money" },
     { key: "time", label: "Analog Time" },
+    { key: "fractions", label: "Fractions" },
+    { key: "decimals", label: "Decimals" },
+    { key: "percent", label: "Percent" },
     { key: "mixed", label: "Mixed Review" },
   ] as const;
 

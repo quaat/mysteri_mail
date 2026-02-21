@@ -2,12 +2,14 @@ import { describe, expect, it } from "vitest";
 
 import case1 from "@/content/cases/case_001_ferret_mustache.json";
 import case2 from "@/content/cases/case_002_banana_in_the_mailbox.json";
+import case3 from "@/content/cases/case_003_the_missing_pie_chart.json";
 import { CaseSchema, type CaseContent, type PuzzleContent } from "@/lib/schema/caseSchema";
 
 import { pickQuip, validatePuzzle } from "./validate";
 
 const parsedCase1 = CaseSchema.parse(case1);
 const parsedCase2 = CaseSchema.parse(case2);
+const parsedCase3 = CaseSchema.parse(case3);
 
 function getPuzzle(caseContent: CaseContent, puzzleId: string): PuzzleContent {
   const puzzle = caseContent.puzzles.find((p) => p.id === puzzleId);
@@ -145,5 +147,37 @@ describe("validatePuzzle edge cases", () => {
     expect(result.correct).toBe(false);
     expect(result.message).toBe("Time’s tricky. 1 clock off.");
     expect(result.meta).toMatchObject({ wrong: 1 });
+  });
+
+  it("FRACTION_PIE_SUM returns helpful fraction diff", () => {
+    const puzzle = getPuzzle(parsedCase3, "p1_fraction_pie");
+    const result = validatePuzzle(puzzle, ["sl_4"]); // 4/8 instead of 6/8
+
+    expect(result.correct).toBe(false);
+    expect(result.message).toBe("You need 2/8 more.");
+    expect(result.meta).toMatchObject({ totalNum: 4 });
+  });
+
+  it("PERCENT_SPRINKLE rejects wrong count", () => {
+    const puzzle = getPuzzle(parsedCase3, "p3_percent_sprinkle");
+    const result = validatePuzzle(puzzle, ["i0", "i1"]);
+
+    expect(result.correct).toBe(false);
+    expect(result.message).toContain("Target is 5");
+  });
+
+  it("FDP_TRIO_MATCH rejects a mismatched trio", () => {
+    const puzzle = getPuzzle(parsedCase3, "p4_trio_match");
+    const result = validatePuzzle(puzzle, {
+      matches: [
+        { fractionId: "f_half", decimalId: "d_half", percentId: "p_half" },
+        { fractionId: "f_quarter", decimalId: "d_quarter", percentId: "p_half" },
+        { fractionId: "f_three_quarters", decimalId: "d_three_quarters", percentId: "p_three_quarters" },
+        { fractionId: "f_tenth", decimalId: "d_tenth", percentId: "p_tenth" },
+      ],
+    });
+
+    expect(result.correct).toBe(false);
+    expect(result.message).toContain("mismatched");
   });
 });

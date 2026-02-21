@@ -34,6 +34,9 @@ const emptyTopicStats = (): Record<TopicKey, TopicStats> => ({
   mul_div: { attempts: 0, correct: 0, streak: 0 },
   money: { attempts: 0, correct: 0, streak: 0 },
   time: { attempts: 0, correct: 0, streak: 0 },
+  fractions: { attempts: 0, correct: 0, streak: 0 },
+  decimals: { attempts: 0, correct: 0, streak: 0 },
+  percent: { attempts: 0, correct: 0, streak: 0 },
   mixed: { attempts: 0, correct: 0, streak: 0 },
 });
 
@@ -93,6 +96,20 @@ export const useProgressStore = create<ProgressState>()(
     {
       name: "mm_progress_v1",
       version: 1,
+      merge: (persisted, current) => {
+        const p = (persisted as any) ?? {};
+        return {
+          ...current,
+          ...p,
+          rewards: {
+            ...current.rewards,
+            ...(p.rewards ?? {}),
+            stickers: { ...(current.rewards?.stickers ?? {}), ...(p.rewards?.stickers ?? {}) },
+            badges: { ...(current.rewards?.badges ?? {}), ...(p.rewards?.badges ?? {}) },
+          },
+          topicStats: { ...emptyTopicStats(), ...(p.topicStats ?? {}) },
+        } as ProgressState;
+      },
     }
   )
 );

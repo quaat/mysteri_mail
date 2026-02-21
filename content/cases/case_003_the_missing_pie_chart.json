@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "caseId": "case_003_the_missing_pie_chart",
+  "orderIndex": 3,
+  "title": "The Case of the Missing Pie Chart",
+  "summary": "A perfectly normal PIE CHART vanished and was replaced with an actual pie wearing a tiny tie. Solve four fraction/decimal/percent clues to find the liar.",
+  "difficultyBand": 4,
+  "estimatedMinutes": 16,
+  "introLetter": {
+    "fromName": "Mayor Mustache (still mustache-less)",
+    "toName": "Detective (You)",
+    "subjectLine": "URGENT: Our pie chart has become… a real pie. It’s networking.",
+    "bodyParagraphs": [
+      "Detective!",
+      "This morning, Town Hall’s Official Pie Chart (VERY IMPORTANT, VERY CIRCULAR) disappeared.",
+      "In its place: a real pie wearing a tiny tie, handing out business cards that say ‘CEO of Crust’.",
+      "Three suspects were seen arguing about fractions, decimals, and percentages like it’s a sport.",
+      "Please solve the clues before the pie starts filing taxes."
+    ],
+    "signature": "Respectfully (and extremely hungry),\nMayor Mustache",
+    "postmark": {
+      "city": "Goofington",
+      "dateISO": "2026-02-23",
+      "stampSlogan": "Goofington Postal Service: We Deliver. The Pie Delivers ThreatS."
+    }
+  },
+  "suspects": [
+    {
+      "id": "s1_countess_halfalina",
+      "name": "Countess Halfalina",
+      "roleTagline": "Dairy Baroness & Part-Time Fraction Influencer",
+      "portraitKey": "portrait_countess_halfalina",
+      "alibi": {
+        "claim": "I only took 1/4 of the chart! That’s 0.4… which is 40%. I am VERY precise.",
+        "note": "Her conversions should match the trio-matching evidence."
+      },
+      "quips": [
+        "I’m not dramatic. I’m 100% emotionally accurate.",
+        "Milk is just a fraction of my personality.",
+        "If I blink twice, it’s because I’m dividing." 
+      ]
+    },
+    {
+      "id": "s2_professor_decimalton",
+      "name": "Professor Decimalton",
+      "roleTagline": "Mad Scientist of Tenths (and Occasional Hundredths)",
+      "portraitKey": "portrait_professor_decimalton",
+      "alibi": {
+        "claim": "I measured 0.75 of the chart with a laser ruler. That’s 75%, aka 3/4. Boom. Science.",
+        "note": "His number-line marks should line up with the decimal clue."
+      },
+      "quips": [
+        "Decimals don’t lie. People do.",
+        "My lab coat has pockets for rounding.",
+        "I once fought a comma. I won." 
+      ]
+    },
+    {
+      "id": "s3_captain_percentula",
+      "name": "Captain Percentula",
+      "roleTagline": "Sales Wizard & Certified 100% Guy",
+      "portraitKey": "portrait_captain_percentula",
+      "alibi": {
+        "claim": "I gave away 50% of my snacks, which is 1/2. I’m basically a hero with crumbs.",
+        "note": "His ‘half’ claims should agree with the fraction-pie clue."
+      },
+      "quips": [
+        "Everything is 200% better with a cape.",
+        "I can sell you a percent of a percent.",
+        "If you need 10% more confidence, I got you." 
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc1_town_hall",
+      "name": "Town Hall Pie Chart Vault",
+      "backgroundKey": "bg_town_hall",
+      "description": "A room so official it smells like paperwork and cinnamon."
+    },
+    {
+      "id": "loc2_decimal_lab",
+      "name": "Decimalton’s Laser Ruler Lab",
+      "backgroundKey": "bg_decimal_lab",
+      "description": "Buzzing machines. Beeping rulers. A single ominous calculator." 
+    },
+    {
+      "id": "loc3_snack_deck",
+      "name": "The Snack Deck (Percentula’s Cape Zone)",
+      "backgroundKey": "bg_snack_deck",
+      "description": "A snack bar with a chalkboard that only says ‘LIMIT: 100%’."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e1_pie_crumbs",
+      "label": "Pie Crumbs (Highly Suspicious)",
+      "description": "Exactly 6/8 of the pie is missing. That’s either a clue… or breakfast.",
+      "spriteKey": "sticker_pie_crumbs"
+    },
+    {
+      "id": "e2_number_line_smear",
+      "label": "Greasy Number-Line Smear",
+      "description": "Someone dragged a marker across decimals like a tiny slippery penguin.",
+      "spriteKey": "sticker_number_line_smear"
+    },
+    {
+      "id": "e3_percent_splatter",
+      "label": "Percent Paint Splatter",
+      "description": "A receipt reads: ‘Painted exactly 25% of the sprinkles. No refunds.’",
+      "spriteKey": "sticker_percent_splatter"
+    },
+    {
+      "id": "e4_trio_chart",
+      "label": "The Triple-Identity Chart",
+      "description": "Fractions, decimals, and percents wearing matching outfits. Very suspicious. Very stylish.",
+      "spriteKey": "sticker_trio_chart"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "p1_fraction_pie",
+      "type": "FRACTION_PIE_SUM",
+      "title": "Pie Piece Lineup",
+      "prompt": "The pie tie says: ‘I am missing 6/8.’ Build exactly 6/8 using slices.",
+      "topicKey": "fractions",
+      "difficulty": 3,
+      "seed": 3001,
+      "points": 12,
+      "unlocksEvidenceId": "e1_pie_crumbs",
+      "ui": {
+        "introLine": "Assemble the missing pie fraction before the pie asks for a promotion.",
+        "successQuips": [
+          "Slice-tacular!",
+          "The pie salutes you. Respectfully."
+        ],
+        "failQuips": [
+          "That pie is… emotionally unbalanced.",
+          "The crust whispers: ‘try again.’"
+        ]
+      },
+      "hints": [
+        "All slices have the same denominator (eighths). Add the numerators.",
+        "Try using one big slice (like 4/8) then make up the rest.",
+        "6/8 can be made with 4/8 + 2/8 (two slices)."
+      ],
+      "params": {
+        "denominator": 8,
+        "targetNumerator": 6,
+        "slices": [
+          { "id": "sl_4", "label": "Big Chunk", "numerator": 4, "spriteKey": "slice_4_8" },
+          { "id": "sl_3a", "label": "Medium Slice A", "numerator": 3, "spriteKey": "slice_3_8" },
+          { "id": "sl_3b", "label": "Medium Slice B", "numerator": 3, "spriteKey": "slice_3_8" },
+          { "id": "sl_2", "label": "Small Chunk", "numerator": 2, "spriteKey": "slice_2_8" },
+          { "id": "sl_1", "label": "Tiny Bite", "numerator": 1, "spriteKey": "slice_1_8" }
+        ],
+        "constraints": { "maxSlices": 4, "bonusFewestSlices": 2 }
+      }
+    },
+    {
+      "id": "p2_decimal_line",
+      "type": "DECIMAL_NUMBER_LINE",
+      "title": "Laser Ruler Drift",
+      "prompt": "Slide the marker to the correct decimal locations and lock them in.",
+      "topicKey": "decimals",
+      "difficulty": 4,
+      "seed": 3002,
+      "points": 14,
+      "unlocksEvidenceId": "e2_number_line_smear",
+      "ui": {
+        "introLine": "The ruler is slippery. The decimals are shy. Be brave.",
+        "successQuips": [
+          "Decimal perfection achieved!",
+          "The laser ruler nods solemnly."
+        ],
+        "failQuips": [
+          "That mark slid into the wrong timeline.",
+          "The decimal point screams internally."
+        ]
+      },
+      "hints": [
+        "Look at the endpoints on the line to know the range.",
+        "0.75 is the same as 3/4.",
+        "Lock each round before moving on."
+      ],
+      "params": {
+        "tolerance": 0,
+        "rounds": [
+          {
+            "id": "d1",
+            "min": 0,
+            "max": 1,
+            "step": 0.05,
+            "target": 0.6,
+            "prompt": "Round 1: Mark 0.6 (six tenths).",
+            "showLabels": true
+          },
+          {
+            "id": "d2",
+            "min": 1,
+            "max": 2,
+            "step": 0.05,
+            "target": 1.25,
+            "prompt": "Round 2: Mark 1.25 (one and twenty-five hundredths).",
+            "showLabels": true
+          },
+          {
+            "id": "d3",
+            "min": 0,
+            "max": 1,
+            "step": 0.05,
+            "target": 0.75,
+            "prompt": "Round 3: Mark 0.75 (seventy-five hundredths).",
+            "showLabels": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "p3_percent_sprinkle",
+      "type": "PERCENT_SPRINKLE",
+      "title": "Sprinkle Percentage Paint",
+      "prompt": "Paint exactly 25% of the sprinkles. The sprinkles are dramatic. They will count.",
+      "topicKey": "percent",
+      "difficulty": 3,
+      "seed": 3003,
+      "points": 12,
+      "unlocksEvidenceId": "e3_percent_splatter",
+      "ui": {
+        "introLine": "Paint the correct percent, or the sprinkles will form a union.",
+        "successQuips": [
+          "Percent perfection!",
+          "The sprinkles applaud in tiny voices."
+        ],
+        "failQuips": [
+          "That’s… a different percent. A rebellious percent.",
+          "The paint refuses to sign the paperwork."
+        ]
+      },
+      "hints": [
+        "25% means 25 out of 100.",
+        "Here it’s out of 20. So find 25% of 20.",
+        "A quarter (1/4) of 20 is 5."
+      ],
+      "params": {
+        "totalItems": 20,
+        "targetPercent": 25,
+        "requiredCount": 5,
+        "itemSpriteKey": "sprinkle_star",
+        "itemLabelSingular": "sprinkle",
+        "itemLabelPlural": "sprinkles",
+        "gridCols": 5
+      }
+    },
+    {
+      "id": "p4_trio_match",
+      "type": "FDP_TRIO_MATCH",
+      "title": "The Triple-Identity Parade",
+      "prompt": "Match fractions, decimals, and percents that mean the same amount.",
+      "topicKey": "mixed",
+      "difficulty": 4,
+      "seed": 3004,
+      "points": 16,
+      "unlocksEvidenceId": "e4_trio_chart",
+      "ui": {
+        "introLine": "Three disguises. One value. The math is undercover.",
+        "successQuips": [
+          "All identities confirmed!",
+          "The chart stops winking at you."
+        ],
+        "failQuips": [
+          "That trio is not related by blood OR math.",
+          "The decimal point throws a tiny tantrum."
+        ]
+      },
+      "hints": [
+        "50% is the same as 1/2 and 0.5.",
+        "25% is the same as 1/4 and 0.25.",
+        "Percent means ‘out of 100’."
+      ],
+      "params": {
+        "shuffleSeed": 9001,
+        "trios": [
+          {
+            "id": "t_half",
+            "fraction": { "id": "f_half", "label": "1/2", "numerator": 1, "denominator": 2 },
+            "decimal": { "id": "d_half", "label": "0.5", "value": 0.5 },
+            "percent": { "id": "p_half", "label": "50%", "value": 50 }
+          },
+          {
+            "id": "t_quarter",
+            "fraction": { "id": "f_quarter", "label": "1/4", "numerator": 1, "denominator": 4 },
+            "decimal": { "id": "d_quarter", "label": "0.25", "value": 0.25 },
+            "percent": { "id": "p_quarter", "label": "25%", "value": 25 }
+          },
+          {
+            "id": "t_three_quarters",
+            "fraction": { "id": "f_three_quarters", "label": "3/4", "numerator": 3, "denominator": 4 },
+            "decimal": { "id": "d_three_quarters", "label": "0.75", "value": 0.75 },
+            "percent": { "id": "p_three_quarters", "label": "75%", "value": 75 }
+          },
+          {
+            "id": "t_tenth",
+            "fraction": { "id": "f_tenth", "label": "1/10", "numerator": 1, "denominator": 10 },
+            "decimal": { "id": "d_tenth", "label": "0.1", "value": 0.1 },
+            "percent": { "id": "p_tenth", "label": "10%", "value": 10 }
+          }
+        ]
+      }
+    }
+  ],
+  "finalQuestion": {
+    "question": "Who swapped the pie chart with a real pie wearing a tie?",
+    "options": ["s1_countess_halfalina", "s2_professor_decimalton", "s3_captain_percentula"],
+    "correctSuspectId": "s1_countess_halfalina",
+    "correctRationale": [
+      "The trio chart shows 1/4 = 0.25 = 25%, not 0.4 or 40%.",
+      "Halfalina’s ‘precise’ conversion is incorrect—so her alibi wobbles.",
+      "The other suspects’ conversions match the evidence."
+    ],
+    "wrongRationales": [
+      {
+        "suspectId": "s2_professor_decimalton",
+        "lines": [
+          "Decimalton’s 0.75 = 75% = 3/4 matches the trio chart.",
+          "His ruler marks are consistent with the decimal clue."
+        ]
+      },
+      {
+        "suspectId": "s3_captain_percentula",
+        "lines": [
+          "50% really is 1/2 (and 0.5).",
+          "Percentula is loud, but the math checks out."
+        ]
+      }
+    ]
+  },
+  "reveal": {
+    "correct": {
+      "headline": "CASE CLOSED: The Countess was 40% wrong (which is… very wrong).",
+      "bodyParagraphs": [
+        "Countess Halfalina gasped, then tried to bribe the pie with cheese.",
+        "When that failed, she admitted she swapped the pie chart for a ‘more charismatic chart’.",
+        "The pie removed its tie and revealed a tiny sticky note: ‘I regret everything.’",
+        "Town Hall’s pie chart was recovered safely… and immediately laminated out of spite."
+      ],
+      "cutsceneKey": "cutscene_pie_tie",
+      "sfxKey": "success"
+    },
+    "incorrect": {
+      "headline": "NOPE: The pie remains employed.",
+      "bodyParagraphs": [
+        "That accusation didn’t stick. Unlike the pie.",
+        "Re-check the conversions: the liar is hiding in the fraction/decimal/percent mix."
+      ]
+    }
+  },
+  "rewards": {
+    "xp": 45,
+    "stickers": [
+      {
+        "id": "reward_sticker_pie_tie",
+        "name": "Pie in a Tie",
+        "spriteKey": "reward_sticker_pie_tie",
+        "rarity": "rare"
+      }
+    ],
+    "badges": [
+      {
+        "id": "badge_fraction_detective",
+        "name": "Fraction Detective",
+        "description": "Solved the case without getting eaten by a pie chart.",
+        "iconKey": "badge_fraction_detective"
+      }
+    ]
+  },
+  "unlockNextCaseIds": []
+}

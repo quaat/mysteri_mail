@@ -190,6 +190,115 @@ export function validatePuzzle(puzzle: PuzzleContent, answer: unknown): Validati
       return { correct: true, message: "Clock cracked!", meta: { wrong } };
     }
 
+    case "FRACTION_PIE_SUM": {
+      const selectedIds = Array.isArray(answer) ? (answer as string[]) : [];
+      const { denominator, targetNumerator, slices, constraints } = puzzle.params;
+
+      if (selectedIds.length === 0) return { correct: false, message: "Add some slices to the plate." };
+      if (selectedIds.length > constraints.maxSlices) {
+        return { correct: false, message: `Too many slices! Max is ${constraints.maxSlices}.` };
+      }
+
+      const byId = new Map(slices.map((s) => [s.id, s] as const));
+      const totalNum = selectedIds.reduce((acc, id) => acc + (byId.get(id)?.numerator ?? 0), 0);
+
+      if (totalNum !== targetNumerator) {
+        const diff = targetNumerator - totalNum;
+        const hint = diff > 0 ? `You need ${diff}/${denominator} more.` : `Too much by ${Math.abs(diff)}/${denominator}.`;
+        return { correct: false, message: hint, meta: { totalNum } };
+      }
+
+      const fewest = constraints.bonusFewestSlices;
+      const bonus = typeof fewest === "number" && selectedIds.length <= fewest;
+      return {
+        correct: true,
+        message: bonus ? "Perfect slice math—and super efficient!" : "Perfect fraction!",
+        meta: { totalNum, bonus },
+      };
+    }
+
+    case "DECIMAL_NUMBER_LINE": {
+      const a = answer as { answers?: Record<string, number> };
+      const answers = a?.answers ?? {};
+      const tol = puzzle.params.tolerance ?? 0;
+
+      let wrong = 0;
+      for (const r of puzzle.params.rounds) {
+        const got = answers[r.id];
+        if (typeof got !== "number") {
+          wrong++;
+          continue;
+        }
+        const ok = tol === 0 ? got === r.target : Math.abs(got - r.target) <= tol;
+        if (!ok) wrong++;
+      }
+
+      if (wrong > 0) {
+        return {
+          correct: false,
+          message: `Almost. ${wrong} mark${wrong === 1 ? "" : "s"} off on the number line.`,
+          meta: { wrong },
+        };
+      }
+
+      return { correct: true, message: "Decimal detective work complete!", meta: { wrong } };
+    }
+
+    case "PERCENT_SPRINKLE": {
+      const selected = Array.isArray(answer) ? (answer as (string | number)[]) : [];
+      const uniqueCount = new Set(selected.map(String)).size;
+      const need = puzzle.params.requiredCount;
+
+      if (uniqueCount === 0) return { correct: false, message: "Pick some items to paint." };
+
+      if (uniqueCount !== need) {
+        const diff = need - uniqueCount;
+        const hint = diff > 0 ? `Paint ${diff} more.` : `Unpaint ${Math.abs(diff)}.`;
+        return { correct: false, message: `${hint} Target is ${need} (${puzzle.params.targetPercent}%).`, meta: { uniqueCount } };
+      }
+
+      return { correct: true, message: "Percent perfectly painted!", meta: { uniqueCount } };
+    }
+
+    case "FDP_TRIO_MATCH": {
+      const a = answer as { matches?: Array<{ fractionId: string; decimalId: string; percentId: string }> };
+      const matches = Array.isArray(a?.matches) ? a.matches : [];
+
+      const byFraction = new Map(puzzle.params.trios.map((t) => [t.fraction.id, t] as const));
+      const needed = puzzle.params.trios.length;
+      if (matches.length !== needed) {
+        return { correct: false, message: `Finish all matches. ${matches.length}/${needed} complete.`, meta: { done: matches.length } };
+      }
+
+      const fracSet = new Set<string>();
+      const decSet = new Set<string>();
+      const pctSet = new Set<string>();
+      let wrong = 0;
+
+      for (const m of matches) {
+        fracSet.add(m.fractionId);
+        decSet.add(m.decimalId);
+        pctSet.add(m.percentId);
+
+        const trio = byFraction.get(m.fractionId);
+        if (!trio) {
+          wrong++;
+          continue;
+        }
+        if (trio.decimal.id !== m.decimalId || trio.percent.id !== m.percentId) wrong++;
+      }
+
+      if (fracSet.size !== needed || decSet.size !== needed || pctSet.size !== needed) {
+        return { correct: false, message: "Each card can only be used once. No double-dipping!", meta: { wrong } };
+      }
+
+      if (wrong > 0) {
+        return { correct: false, message: `So close—${wrong} trio${wrong === 1 ? "" : "s"} mismatched.`, meta: { wrong } };
+      }
+
+      return { correct: true, message: "Triple match complete!", meta: { wrong } };
+    }
+
     default:
       return { correct: false, message: "Puzzle type not implemented yet." };
   }

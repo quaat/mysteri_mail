@@ -21,6 +21,10 @@ import { EvidenceTapePathPuzzle } from "@/components/puzzles/EvidenceTapePathPuz
 import { NumberInputQuizPuzzle } from "@/components/puzzles/NumberInputQuizPuzzle";
 import { CoinSumPuzzle } from "@/components/puzzles/CoinSumPuzzle";
 import { ClockReadPuzzle } from "@/components/puzzles/ClockReadPuzzle";
+import { FractionPieSumPuzzle } from "@/components/puzzles/FractionPieSumPuzzle";
+import { DecimalNumberLinePuzzle } from "@/components/puzzles/DecimalNumberLinePuzzle";
+import { PercentSprinklePuzzle } from "@/components/puzzles/PercentSprinklePuzzle";
+import { FdpTrioMatchPuzzle } from "@/components/puzzles/FdpTrioMatchPuzzle";
 
 export function PuzzleClient({ c, p }: { c: CaseContent; p: PuzzleContent }) {
   const router = useRouter();
@@ -129,6 +133,14 @@ export function PuzzleClient({ c, p }: { c: CaseContent; p: PuzzleContent }) {
               <CoinSumPuzzle puzzle={p} onSubmit={onSubmit} />
             ) : p.type === "CLOCK_READ" ? (
               <ClockReadPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "FRACTION_PIE_SUM" ? (
+              <FractionPieSumPuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "DECIMAL_NUMBER_LINE" ? (
+              <DecimalNumberLinePuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "PERCENT_SPRINKLE" ? (
+              <PercentSprinklePuzzle puzzle={p} onSubmit={onSubmit} />
+            ) : p.type === "FDP_TRIO_MATCH" ? (
+              <FdpTrioMatchPuzzle puzzle={p} onSubmit={onSubmit} />
             ) : (
               <p>Not implemented yet.</p>
             )}

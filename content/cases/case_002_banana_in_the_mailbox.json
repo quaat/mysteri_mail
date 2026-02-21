@@ -336,5 +336,5 @@
       }
     ]
   },
-  "unlockNextCaseIds": []
+  "unlockNextCaseIds": ["case_003_the_missing_pie_chart"]
 }
