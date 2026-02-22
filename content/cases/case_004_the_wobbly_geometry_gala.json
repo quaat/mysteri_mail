@@ -12,13 +12,9 @@
     "subjectLine": "HELP. The Geometry Gala is tonight and the SHAPES are doing crimes.",
     "bodyParagraphs": [
       "Detective!",
-      "Tonight is the annual Geometry Gala (very fancy, very sparkly, very ‘please do not lick the exhibits’).",
-      "But this morning, someone replaced our perfect decorations with wobbly impostors:",
-      "• the perimeter fence is missing a chunk (or… is it?)",
-      "• the stage blueprint has been ‘optimized’ by a raccoon with a marker",
-      "• the angle posters are labeled with lies",
-      "• the giant butterfly banner is… NOT symmetrical. A judge dropped their clipboard into the punch bowl.",
-      "Three suspects were seen carrying rulers and giggling like villains in a cartoon.",
+      "Tonight is the annual Geometry Gala (very fancy, very sparkly, and very “please do not lick the exhibits”).",
+      "But this morning, someone swapped our perfect decorations for wobbly impostors. The perimeter fence is missing a chunk (or… is it?), the stage blueprint has been “optimized” by a raccoon with a marker, the angle posters are labeled with absolute lies, and the giant butterfly banner is definitely NOT symmetrical—one of the judges dropped their clipboard straight into the punch bowl.",
+      "Three suspects were spotted carrying rulers and giggling like cartoon villains.",
       "Please solve the clues before the gala begins and the triangle tries to run for mayor."
     ],
     "signature": "Sincerely,\nCurator Prism McShimmer\n(Director of Shapes, Keeper of the Very Serious Protractor)",
@@ -216,12 +212,12 @@
         "successQuips": [
           "Angle truth restored! The posters quit playing tricks on your eyeballs.",
           "Correct! The protractor exhales.",
-          "You classified angles with the confidence of a wizard." 
+          "You classified angles with the confidence of a wizard."
         ],
         "failQuips": [
           "That label is… geometrically suspicious.",
           "The angle disagrees and files a complaint.",
-          "Nope. The protractor just facepalmed." 
+          "Nope. The protractor just facepalmed."
         ]
       },
       "hints": [
@@ -271,12 +267,12 @@
         "successQuips": [
           "Symmetry secured! The banner stops looking insulted.",
           "Perfect mirror line. The doodle feels balanced.",
-          "Nice! Even the mirror is impressed." 
+          "Nice! Even the mirror is impressed."
         ],
         "failQuips": [
           "Nope—now it’s extra lopsided. The mirror sighs.",
           "The doodle is still lopsided. It’s judging you.",
-          "Mirror says: ‘nope’." 
+          "Mirror says: ‘nope’."
         ]
       },
       "hints": [
@@ -354,7 +350,7 @@
       "bodyParagraphs": [
         "Your accusation echoes across the museum… and the angles laugh.",
         "Somewhere, a protractor spins dramatically.",
-        "Try again—one suspect’s story doesn’t match the geometry evidence." 
+        "Try again—one suspect’s story doesn’t match the geometry evidence."
       ]
     }
   },
