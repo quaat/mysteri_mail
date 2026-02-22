@@ -21,7 +21,7 @@
     "postmark": {
       "city": "Goofington",
       "dateISO": "2026-02-23",
-      "stampSlogan": "Goofington Postal Service: We Deliver. The Pie Delivers ThreatS."
+      "stampSlogan": "Goofington Postal Service: We Deliver. The Pie Delivers Side-Eye."
     }
   },
   "suspects": [
@@ -35,7 +35,7 @@
         "note": "Her conversions should match the trio-matching evidence."
       },
       "quips": [
-        "I’m not dramatic. I’m 100% emotionally accurate.",
+        "I’m not dramatic. I’m just precisely portioned.",
         "Milk is just a fraction of my personality.",
         "If I blink twice, it’s because I’m dividing." 
       ]
@@ -132,10 +132,10 @@
         "introLine": "Assemble the missing pie fraction before the pie asks for a promotion.",
         "successQuips": [
           "Slice-tacular!",
-          "The pie salutes you. Respectfully."
+          "The pie tips its tiny tie at you."
         ],
         "failQuips": [
-          "That pie is… emotionally unbalanced.",
+          "Not quite—your slices don’t make 6/8 yet.",
           "The crust whispers: ‘try again.’"
         ]
       },
@@ -168,14 +168,14 @@
       "points": 14,
       "unlocksEvidenceId": "e2_number_line_smear",
       "ui": {
-        "introLine": "The ruler is slippery. The decimals are shy. Be brave.",
+        "introLine": "Slide the scanner to the right spot on the number line—then hit LOCK before it scoots away.",
         "successQuips": [
           "Decimal perfection achieved!",
-          "The laser ruler nods solemnly."
+          "The laser ruler goes *pew-pew* in celebration."
         ],
         "failQuips": [
           "That mark slid into the wrong timeline.",
-          "The decimal point screams internally."
+          "The decimal point goes: 'EEP! Try again.'"
         ]
       },
       "hints": [
@@ -227,7 +227,7 @@
       "points": 12,
       "unlocksEvidenceId": "e3_percent_splatter",
       "ui": {
-        "introLine": "Paint the correct percent, or the sprinkles will form a union.",
+        "introLine": "Paint the correct percent, or the sprinkles will escape and decorate your shoes.",
         "successQuips": [
           "Percent perfection!",
           "The sprinkles applaud in tiny voices."
@@ -269,7 +269,7 @@
           "The chart stops winking at you."
         ],
         "failQuips": [
-          "That trio is not related by blood OR math.",
+          "Nope—those three are strangers who wandered into the same lineup.",
           "The decimal point throws a tiny tantrum."
         ]
       },

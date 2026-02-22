@@ -3,7 +3,7 @@
   "caseId": "case_004_the_wobbly_geometry_gala",
   "orderIndex": 4,
   "title": "The Case of the Wobbly Geometry Gala",
-  "summary": "The town’s fancy Geometry Gala decorations have gone FULL GOBLIN: frames are crooked, angles are lying, and a butterfly banner is somehow… asymmetrical. Solve four geometry clues (perimeter, area, angles, symmetry) to catch the goofball.",
+  "summary": "The Geometry Gala decorations are a mess: frames are crooked, angles are mislabeled, and the butterfly banner got mirrored wrong on purpose. Solve four geometry clues (perimeter, area, angles, symmetry) to catch the goofball.",
   "difficultyBand": 4,
   "estimatedMinutes": 18,
   "introLetter": {
@@ -17,7 +17,7 @@
       "• the perimeter fence is missing a chunk (or… is it?)",
       "• the stage blueprint has been ‘optimized’ by a raccoon with a marker",
       "• the angle posters are labeled with lies",
-      "• the giant butterfly banner is… NOT symmetrical. That is illegal in 43 countries (made-up ones).",
+      "• the giant butterfly banner is… NOT symmetrical. A judge dropped their clipboard into the punch bowl.",
       "Three suspects were seen carrying rulers and giggling like villains in a cartoon.",
       "Please solve the clues before the gala begins and the triangle tries to run for mayor."
     ],
@@ -56,7 +56,7 @@
       "quips": [
         "I don’t make mistakes. I make ‘alternate realities’.",
         "90 degrees is a rumor.",
-        "Obtuse? I prefer the term ‘emotionally spacious’."
+        "Obtuse? I prefer 'generously angled'."
       ]
     },
     {
@@ -136,8 +136,8 @@
         "introLine": "Count each side. No teleporting. No wormholes.",
         "successQuips": [
           "Perimeter captured! The fence stops screaming.",
-          "You measured it so hard the numbers got nervous.",
-          "Gerald the tape measure nods respectfully."
+          "You measured it so cleanly the fence lines look jealous.",
+          "Gerald the tape measure snaps back into its case with a proud *zip*."
         ],
         "failQuips": [
           "That’s not the perimeter… that’s a *perim-eh-ter*.",
@@ -214,7 +214,7 @@
       "ui": {
         "introLine": "Angles can’t all be acute, Professor.",
         "successQuips": [
-          "Angle truth restored! The posters stop gaslighting you.",
+          "Angle truth restored! The posters quit playing tricks on your eyeballs.",
           "Correct! The protractor exhales.",
           "You classified angles with the confidence of a wizard." 
         ],
@@ -267,14 +267,14 @@
       "points": 12,
       "unlocksEvidenceId": "e4_mirror_smear",
       "ui": {
-        "introLine": "Find the mirror line. Avoid emotional mirrors.",
+        "introLine": "Find the mirror line. Try not to smudge the glitter.",
         "successQuips": [
           "Symmetry secured! The banner stops looking insulted.",
           "Perfect mirror line. The doodle feels balanced.",
           "Nice! Even the mirror is impressed." 
         ],
         "failQuips": [
-          "That line made it worse. Somehow.",
+          "Nope—now it’s extra lopsided. The mirror sighs.",
           "The doodle is still lopsided. It’s judging you.",
           "Mirror says: ‘nope’." 
         ]

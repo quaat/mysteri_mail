@@ -13,7 +13,7 @@
     "bodyParagraphs": [
       "Dear Detective,",
       "This morning, I woke up to discover my magnificent mustache has vanished. In its place is a ferret. A polite ferret. A ferret wearing tiny sunglasses that say 'DO NOT QUESTION ME.'",
-      "Three suspects were nearby. Each offered an alibi that sounded... mathematically confident.",
+      "Three suspects were nearby. Each gave me an alibi with numbers and a straight face. I trust neither.",
       "Please investigate before the ferret holds a press conference."
     ],
     "signature": "With trembling upper lip,\nMayor Mustachio Q. Whiskerboom",
@@ -202,7 +202,7 @@
       "id": "p2_mailbag_balance",
       "type": "MAILBAG_BALANCE",
       "title": "Suspicious Sack Scales",
-      "prompt": "Balance the two mailbags so BOTH weigh exactly 25. Drag movable parcels between bags. (Sealed parcels refuse to move because they’re shy.)",
+      "prompt": "Balance the two mailbags so BOTH weigh exactly 25. Drag movable parcels between bags. (Sealed parcels are taped down. They do not negotiate.)",
       "topicKey": "add_sub",
       "difficulty": 2,
       "seed": 1002,
@@ -212,7 +212,7 @@
         "introLine": "Captain Honk whispers: 'HONK (this means: please do math).' ",
         "successQuips": [
           "Balanced! The scale does a happy little jig.",
-          "Perfect! The mailbags are emotionally equal now.",
+          "Perfect! Both bags hit 25—no wobble, no drama.",
           "HONK of approval! (That’s a good honk.)"
         ],
         "failQuips": [
@@ -356,7 +356,7 @@
       "ui": {
         "introLine": "You unroll the tape measure. It unrolls back. You glare. It behaves.",
         "successQuips": [
-          "Nailed it! The tape measure nods respectfully.",
+          "Nailed it! The tape measure retracts with a satisfied *zip*.",
           "You reached 23! The banana peel files a complaint.",
           "Route verified! Wobble science is real."
         ],
@@ -420,7 +420,7 @@
         "Professor Pumpernickel freezes like a baguette in a snowstorm.",
         "\"FINE!\" he blurts. \"I borrowed the mustache for… scientific reasons.\"",
         "The ferret removes its tiny sunglasses. Underneath? EVEN TINIER SUNGLASSES.",
-        "The Mayor’s mustache is returned, slightly buttered, and emotionally stronger than ever."
+        "The Mayor’s mustache is returned, slightly buttered, and we all agree to never speak of it again."
       ],
       "cutsceneKey": "cutscene_ferret_sunglasses_reveal",
       "sfxKey": "sfx_ferret_giggle"

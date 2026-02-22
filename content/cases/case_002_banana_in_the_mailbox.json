@@ -3,7 +3,7 @@
   "caseId": "case_002_banana_in_the_mailbox",
   "orderIndex": 2,
   "title": "The Case of the Banana in the Mailbox",
-  "summary": "Someone mailed a banana. That’s illegal in 12 countries and also in the Mayor’s heart. Solve four clues (times tables, sharing, coins, and clocks) to find the fibber.",
+  "summary": "Someone mailed a banana to City Hall. It got logged under 'Fruit Crimes' and placed in Evidence Bag B(anana). Solve four clues (times tables, sharing, coins, and clocks) to find the fibber.",
   "difficultyBand": 3,
   "estimatedMinutes": 14,
   "introLetter": {
@@ -165,7 +165,7 @@
       "points": 10,
       "unlocksEvidenceId": "e_sandwich_split",
       "ui": {
-        "introLine": "A sandwich appears. It looks nervous.",
+        "introLine": "A sandwich arrives wearing a tiny trench coat. It refuses to make eye contact.",
         "successQuips": [
           "Evenly shared! The sandwich relaxes.",
           "Correct! The slices applaud politely.",
@@ -303,7 +303,7 @@
       "headline": "CASE CLOSED: The Clockwork Squirrel Was… Off By A Lot.",
       "bodyParagraphs": [
         "Clockwork Squirrel gasps. 'Time is… not circular?'",
-        "The banana nods solemnly (somehow).",
+        "The banana gives a quiet *plop* of approval. Science cannot explain it.",
         "With the clocks corrected, the banana is safely escorted out of Mailbox #7.",
         "Everyone agrees to mail only legal objects from now on. Probably."
       ]
